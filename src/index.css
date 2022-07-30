@@ -1,0 +1,11 @@
+@import "/src/vendor/fonts/fonts.css";
+.page {
+  margin: 0 auto;
+  max-width: 1280px;
+  min-width: 320px;
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}

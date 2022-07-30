@@ -1,0 +1,35 @@
+.nav{
+  display: flex;
+  margin:0;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.nav__item{
+  text-decoration: none;
+  height: 32px;
+  min-width: 76px;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+.nav__link{
+  text-decoration: none;
+  color: #000000;
+}
+.nav__item_type_signin{
+  background-color: #2BE080;
+  color: #000000;
+}
+.nav__item:before{
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.nav__item_type_signup{
+  color: #000000;
+}

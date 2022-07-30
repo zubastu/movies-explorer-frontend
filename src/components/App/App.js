@@ -11,15 +11,17 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/movies" element={<Movies />} />
-      <Route path="/saved-movies" element={<SavedMovies />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/signin" element={<Login />} />
-      <Route path="/signup" element={<Register />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 

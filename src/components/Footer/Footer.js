@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.css";
-import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,15 +10,19 @@ const Footer = () => {
       <div className="footer__content">
         <p className="footer__copyright">&copy;2022</p>
         <nav className="footer__nav">
-          <NavLink className="nav__link" to="">
+          <a
+            className="nav__link"
+            href="https://practicum.yandex.ru/"
+            target="_blank"
+          >
             Яндекс.Практикум
-          </NavLink>
-          <NavLink className="nav__link" to="">
+          </a>
+          <a className="nav__link" href="https://github.com/" target="_blank">
             Github
-          </NavLink>
-          <NavLink className="nav__link" to="">
+          </a>
+          <a className="nav__link" href="https://facebook.com/" target="_blank">
             Facebook
-          </NavLink>
+          </a>
         </nav>
       </div>
     </footer>

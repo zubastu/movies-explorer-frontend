@@ -18,7 +18,7 @@ const NotFound = () => {
   return (
     <div className={blockSelector}>
       <div className={contentSelector}>
-        <h1 className={headingSelector}>{headingText}</h1>
+        <h2 className={headingSelector}>{headingText}</h2>
         <p className={subheadingSelector}>{subheadingText}</p>
       </div>
       <p className={goBackSelector} onClick={goBack}>

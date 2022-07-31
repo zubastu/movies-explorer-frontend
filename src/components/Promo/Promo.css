@@ -1,0 +1,45 @@
+.promo{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 493px;
+  width:calc(100% - 40px *2);
+  left: 40px;
+  top: 94px;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  flex: 1 0 auto;
+}
+.promo__heading{
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-align: center;
+  max-width: 730px;
+  margin: 0;
+  flex: 0.5 0 auto;
+}
+.promo__nav-container{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  margin: 0 0 30px 0;
+}
+.promo__nav-item{
+  height: 36px;
+  min-width: 96px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  background-color: #E8E8E8;
+  text-align: center;
+}
+.promo__nav-item:before{
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}

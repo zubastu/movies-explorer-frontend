@@ -4,7 +4,7 @@ import MainTitle from "../MainTitle/MainTitle";
 
 const Techs = () => {
   return (
-    <div className="techs" id="tech-section">
+    <section className="techs" id="tech-section">
       <MainTitle text="Технологии" />
       <div className="tech__content">
         <div className="techs__text-content">
@@ -25,7 +25,7 @@ const Techs = () => {
           <li className="technologies__item">mongoDB</li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 

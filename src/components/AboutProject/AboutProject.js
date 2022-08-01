@@ -4,7 +4,7 @@ import MainTitle from "../MainTitle/MainTitle";
 
 const AboutProject = () => {
   return (
-    <div className="about-project" id="about-section">
+    <section className="about-project" id="about-section">
       <MainTitle text="О проекте" />
 
       <div className="about-project__content">
@@ -30,7 +30,7 @@ const AboutProject = () => {
         <span className="time-line__stack-backend">Back-end</span>
         <span className="time-line__stack-frontend">Front-end</span>
       </div>
-    </div>
+    </section>
   );
 };
 

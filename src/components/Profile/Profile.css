@@ -1,0 +1,81 @@
+.profile{
+  min-height: 626px;
+  display: flex;
+  flex-direction: column;
+  padding: 74px 0 70px 0;
+  align-items: center;
+}
+.profile__heading{
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  flex: 0.4 0 auto;
+}
+.profile__content{
+  display: flex;
+  flex-direction: column;
+  min-width: 410px;
+  flex: 0.6 0 auto;
+}
+.profile__name-container{
+  border-bottom: 1px solid #E8E8E8;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 30px;
+}
+.profile__email-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  min-height: 30px;
+}
+.profile__name-placeholder{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+.profile__name{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+.profile__email-placeholder{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+.profile__email{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+}
+.profile__buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 410px;
+}
+.profile__btn-change{
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: #000000;
+  background-color: transparent;
+  cursor: pointer;
+}
+.profile__btn-out{
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: #FF3055;
+  background-color: transparent;
+  cursor: pointer;
+}

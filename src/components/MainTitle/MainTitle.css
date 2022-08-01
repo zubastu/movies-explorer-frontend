@@ -1,5 +1,6 @@
 .title-container{
   border-bottom: 1px solid #000000;
+  min-width: 100%;
 }
 .main-title{
   font-size: 22px;

@@ -5,6 +5,7 @@
   min-height: 74px;
   width: calc(100% - 70px *2);
   margin: 0 auto;
+  box-sizing: border-box;
 }
 .header__logo{
   width: 38px;

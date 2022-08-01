@@ -4,9 +4,8 @@
   justify-content: flex-start;
   min-height: 608px;
   box-sizing: border-box;
-  width: calc(100% - 70px * 2);
   margin: 0 auto;
-  padding: 110px 0 110px 0;
+  padding: 110px 70px 110px 70px;
 }
 .about-project__content{
   display: grid;

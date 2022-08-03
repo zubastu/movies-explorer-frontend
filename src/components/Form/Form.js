@@ -1,5 +1,7 @@
 import React from "react";
 import "./Form.css";
+import searchIcon from "../../images/search-icon.svg";
+import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 
 const Form = ({ formName }) => {
   if (formName === "login") {
@@ -67,16 +69,18 @@ const Form = ({ formName }) => {
   if (formName === "search") {
     return (
       <form className={`form form__type_${formName}`}>
+        <img className="search-icon" alt="Картинка поиска" src={searchIcon} />
         <fieldset className="form__field">
-          <input className={`form__input form__input_type_${formName}`} />
-          <span className="form__error-span"></span>
+          <input
+            className={`form__input form__input_type_${formName}`}
+            placeholder="Фильм"
+          />
         </fieldset>
         <button
           type="submit"
           className={`form__submit form__submit_type_${formName}`}
-        >
-          search
-        </button>
+        />
+        <CustomCheckbox />
       </form>
     );
   }

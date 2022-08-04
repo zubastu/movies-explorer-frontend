@@ -39,7 +39,7 @@
   cursor: pointer;
   border-radius: 5px;
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1200px) {
   .search-container{
     width: calc(100% - 30px *2);
   }

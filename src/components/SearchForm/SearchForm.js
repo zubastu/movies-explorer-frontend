@@ -5,17 +5,22 @@ import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 
 const SearchForm = () => {
   return (
-    <form className="form form__type_search">
-      <img className="search-icon" alt="Картинка поиска" src={searchIcon} />
-      <fieldset className="form__field">
-        <input
-          className="form__input form__input_type_search"
-          placeholder="Фильм"
-        />
-      </fieldset>
-      <button type="submit" className="form__submit form__submit_type_search" />
+    <>
+      <form className="form form__type_search">
+        <img className="search-icon" alt="Картинка поиска" src={searchIcon} />
+        <fieldset className="form__field form__field__type_search">
+          <input
+            className="form__input form__input_type_search"
+            placeholder="Фильм"
+          />
+          <button
+            type="submit"
+            className="form__submit form__submit_type_search"
+          />
+        </fieldset>
+      </form>
       <CustomCheckbox />
-    </form>
+    </>
   );
 };
 

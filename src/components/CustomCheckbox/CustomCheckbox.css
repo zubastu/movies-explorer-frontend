@@ -4,7 +4,7 @@
   align-items: center;
   box-sizing: border-box;
   margin: 0;
-  padding: 0 0 0 30px;
+  padding: 0 20px 0 30px;
   min-height: 40px;
   border-left: 1px solid #E8E8E8;
   gap: 14px;
@@ -48,4 +48,14 @@
 }
 .custom-checkbox__input:checked:before{
   left: 18px;
+}
+@media screen and (max-width: 650px){
+  .custom-checkbox{
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: #FFFFFF;
+    min-height: 90px;
+    align-items: flex-end;
+  }
 }

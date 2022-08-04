@@ -5,7 +5,7 @@ const Form = ({ formName }) => {
   if (formName === "login") {
     return (
       <form className={`form form__type_${formName}`}>
-        <fieldset className="form__field">
+        <fieldset className="form__field form__field__type_auth">
           <label className="form__label">
             E-mail
             <input
@@ -38,7 +38,7 @@ const Form = ({ formName }) => {
   if (formName === "register") {
     return (
       <form className={`form form__type_${formName}`}>
-        <fieldset className="form__field">
+        <fieldset className="form__field form__field__type_auth">
           <label className="form__label">
             Имя
             <input className={`form__input form__input_type_${formName}`} />

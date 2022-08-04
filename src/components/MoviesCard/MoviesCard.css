@@ -1,6 +1,7 @@
 .movie-card{
   max-height: 271px;
-  width: 364px;
+  max-width: 364px;
+  min-width: 300px;
   background: #FDFDFD;
   box-shadow: 1px 4px 30px rgba(0, 0, 0, 0.08);
 }
@@ -15,7 +16,7 @@
   gap: 9px;
 }
 .movie-card__title{
-  width: 280px;
+  width: 100%;
   margin: 0;
   font-size: 15px;
   font-weight: 500;
@@ -30,13 +31,10 @@
   color: #A0A0A0;
 }
 .movie-card__image{
-  width: 364px;
-  min-height: 203px;
-  max-height: 203px;
+  width: 100%;
   object-fit: cover;
   align-self: flex-end;
 }
-
 .movie-card__input{
   position: relative;
   width: 30px;
@@ -67,4 +65,9 @@
   background: url("../../images/saave-checkbox-icon.svg");
   left: 10px;
   top: 8px;
+}
+@media screen and (max-width: 1000px) {
+  .movie-card{
+    max-width: 339px;
+  }
 }

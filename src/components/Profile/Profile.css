@@ -79,3 +79,16 @@
   background-color: transparent;
   cursor: pointer;
 }
+@media screen and (max-width: 500px){
+  .profile{
+    max-width: 260px;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .profile__content{
+    min-width: 260px;
+  }
+  .profile__buttons{
+    min-width: 260px;
+  }
+}

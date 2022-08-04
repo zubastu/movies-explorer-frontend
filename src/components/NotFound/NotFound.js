@@ -1,28 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./NotFound.css";
-import { notFoundTexts, notFoundSelectors } from "../../utils/constants";
 
 const NotFound = () => {
-  const {
-    blockSelector,
-    goBackSelector,
-    headingSelector,
-    subheadingSelector,
-    contentSelector,
-  } = notFoundSelectors;
-  const { goBackText, headingText, subheadingText } = notFoundTexts;
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
   return (
-    <div className={blockSelector}>
-      <div className={contentSelector}>
-        <h2 className={headingSelector}>{headingText}</h2>
-        <p className={subheadingSelector}>{subheadingText}</p>
+    <div className="not-found">
+      <div className="not-found__content">
+        <h2 className="not-found__heading">404</h2>
+        <p className="not-found__subheading">Страница не найдена</p>
       </div>
-      <p className={goBackSelector} onClick={goBack}>
-        {goBackText}
+      <p className="not-found__go-back" onClick={goBack}>
+        Назад
       </p>
     </div>
   );

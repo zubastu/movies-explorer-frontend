@@ -1,0 +1,70 @@
+.movie-card{
+  max-height: 271px;
+  width: 364px;
+  background: #FDFDFD;
+  box-shadow: 1px 4px 30px rgba(0, 0, 0, 0.08);
+}
+.movie-card__description{
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+.movie-card__info{
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.movie-card__title{
+  width: 280px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #000000;
+}
+.movie-card__duration{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  color: #A0A0A0;
+}
+.movie-card__image{
+  width: 364px;
+  min-height: 203px;
+  max-height: 203px;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
+.movie-card__input{
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  outline: none;
+  background: #F9F9F9;
+  transition: .5s ease;
+}
+.movie-card__input:checked{
+  background-color: #2BE080;
+}
+.movie-card__input:before{
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: url("../../images/save-checkbox-disabled.svg");
+  left: 10px;
+  top: 8px;
+}
+.movie-card__input:checked:before{
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: url("../../images/saave-checkbox-icon.svg");
+  left: 10px;
+  top: 8px;
+}

@@ -26,13 +26,14 @@
   background: #EBEBEB;
   border-radius: 20px;
   transition: .5s ease;
+  cursor: pointer;
 }
 .custom-checkbox__input:checked{
   background: #2BE080;
   margin: 0;
   padding: 0;
 }
-input[type="checkbox"]:before{
+.custom-checkbox__input:before{
   content: '';
   position: absolute;
   width: 16px;

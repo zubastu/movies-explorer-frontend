@@ -13,14 +13,13 @@ const Movies = () => {
         <SearchForm />
       </div>
 
-      <div className="movies__content">
-        <MoviesCardList />
-        <div className="more-button-container">
-          <button className="load-more-btn" type="button">
-            Ещё
-          </button>
-        </div>
+      <MoviesCardList />
+      <div className="more-button-container">
+        <button className="load-more-btn" type="button">
+          Ещё
+        </button>
       </div>
+
       <Footer />
     </section>
   );

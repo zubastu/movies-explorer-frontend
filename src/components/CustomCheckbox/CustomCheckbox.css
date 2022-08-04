@@ -57,5 +57,6 @@
     background: #FFFFFF;
     min-height: 90px;
     align-items: flex-end;
+    width: 100%;
   }
 }

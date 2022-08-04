@@ -33,3 +33,8 @@
 .nav__item_type_signup{
   color: #000000;
 }
+@media screen and (max-width: 800px){
+  .nav{
+    display: none;
+  }
+}

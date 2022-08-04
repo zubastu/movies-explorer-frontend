@@ -8,6 +8,7 @@ const Header = () => {
     <header className="header">
       <img className="logo" alt="Логотип" src={logo} />
       <Navigation />
+      <button className="header__burger-button" />
     </header>
   );
 };

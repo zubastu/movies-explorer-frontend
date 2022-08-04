@@ -9,3 +9,8 @@
   flex: 1 0 auto;
   box-sizing: border-box;
 }
+@media screen and (max-width: 500px){
+  .register{
+    align-items: center;
+  }
+}

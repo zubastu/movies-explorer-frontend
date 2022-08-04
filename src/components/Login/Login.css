@@ -32,3 +32,8 @@
   color: #3456F3;
   text-decoration: none;
 }
+@media screen and (max-width: 500px){
+  .login{
+    align-items: center;
+  }
+}

@@ -15,7 +15,7 @@ const Main = ({ setMenuActive }) => {
       <AboutProject />
       <Techs />
       <AboutMe />
-      {/*      <Portfolio />*/}
+      <Portfolio />
       <Footer />
     </>
   );

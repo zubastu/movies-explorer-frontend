@@ -1,9 +1,11 @@
 .nav{
-  display: flex;
+  display: grid;
   margin:0;
-  align-items: center;
-  justify-content: center;
   gap: 30px;
+  width: 100%;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: space-between;
 }
 .nav__item{
   text-decoration: none;
@@ -16,14 +18,32 @@
   line-height: 16px;
   text-align: center;
 }
+.nav__item-container{
+  display: flex;
+  gap: 30px;
+  margin: 0 0 0 44px;
+}
 .nav__link{
   text-decoration: none;
   color: #000000;
+  box-sizing: border-box;
+}
+.nav__item_type_active{
+  border-bottom: 1px solid #2BE080;
 }
 .nav__item_type_signin{
   background-color: #2BE080;
   color: #000000;
 }
+.nav__item_type_films{
+  justify-self: flex-start;
+  max-width: 142px;
+}
+.nav__item_type_saved-films{
+  justify-self: flex-start;
+  max-width: 142px;
+}
+
 .nav__item:before{
   content: "";
   display: inline-block;
@@ -33,6 +53,15 @@
 .nav__item_type_signup{
   color: #000000;
 }
+.nav__item_type_account{
+  height: 32px;
+  width: 100px;
+  background: #F9F9F9;
+  font-size: 14px;
+  font-weight: 500;
+  justify-self: flex-end;
+}
+
 @media screen and (max-width: 800px){
   .nav{
     display: none;

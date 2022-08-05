@@ -7,10 +7,10 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-const Main = () => {
+const Main = ({ setMenuActive }) => {
   return (
     <>
-      <Header />
+      <Header setMenuActive={setMenuActive} />
       <Promo />
       <AboutProject />
       <Techs />

@@ -3,12 +3,15 @@ import "./Header.css";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 
-const Header = () => {
+const Header = ({ setMenuActive }) => {
   return (
     <header className="header">
       <img className="logo" alt="Логотип" src={logo} />
       <Navigation />
-      <button className="header__burger-button" />
+      <button
+        className="header__burger-button"
+        onClick={() => setMenuActive(true)}
+      />
     </header>
   );
 };

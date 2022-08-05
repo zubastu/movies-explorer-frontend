@@ -2,14 +2,14 @@ import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 
-const Profile = () => {
+const Profile = ({ setMenuActive }) => {
   const user = {
     name: "Виталий",
     email: "simple@mail.com",
   };
   return (
     <>
-      <Header />
+      <Header setMenuActive={setMenuActive} />
       <section className="profile">
         <h3 className="profile__heading">{`Привет, ${user.name}!`}</h3>
         <div className="profile__content">

@@ -11,6 +11,7 @@
   border-radius: 10px;
   background-color: #F5F5F5;
   flex: 1 0 auto;
+  box-sizing: border-box;
 }
 .promo__heading{
   font-size: 50px;
@@ -46,4 +47,42 @@
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+@media screen and (max-width: 1000px){
+  .promo{
+    width: calc(100% - 20px *2);
+  }
+}
+@media screen and (max-width: 800px){
+  .promo__heading{
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 52px;
+    max-width: 680px;
+  }
+}
+@media screen and (max-width: 600px){
+  .promo{
+    width: calc(100% - 14px *2);
+  }
+  .promo__heading{
+    font-size: 29px;
+    font-weight: 400;
+    line-height: 37px;
+    max-width: 480px;
+  }
+  .promo__nav-container{
+    gap: 6px;
+  }
+  .promo__nav-item{
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    min-width: 82px;
+  }
+}
+@media screen and (max-width: 450px){
+  .promo__heading{
+    max-width: 292px;
+  }
 }

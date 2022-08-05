@@ -12,10 +12,10 @@ const Main = ({ setMenuActive }) => {
     <>
       <Header setMenuActive={setMenuActive} />
       <Promo />
-      <AboutProject />
+      {/*   <AboutProject />
       <Techs />
       <AboutMe />
-      <Portfolio />
+      <Portfolio />*/}
       <Footer />
     </>
   );

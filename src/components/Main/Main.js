@@ -14,8 +14,8 @@ const Main = ({ setMenuActive }) => {
       <Promo />
       <AboutProject />
       <Techs />
-      {/*      <AboutMe />
-      <Portfolio />*/}
+      <AboutMe />
+      {/*      <Portfolio />*/}
       <Footer />
     </>
   );

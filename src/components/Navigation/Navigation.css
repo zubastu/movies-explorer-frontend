@@ -6,6 +6,14 @@
   grid-auto-columns: max-content;
   justify-content: space-between;
 }
+.nav-landing{
+  display: grid;
+  margin:0;
+  gap: 30px;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: flex-end;
+}
 .nav-movies{
   display: flex;
   width: 100%;
@@ -76,5 +84,23 @@
   }
   .nav-movies{
     display: none;
+  }
+}
+@media screen and (max-width: 500px){
+  .nav__auth-container{
+    gap: 14px;
+  }
+  .nav__item{
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+  .nav__item_type_signin{
+    min-width: 54px;
+    max-height: 26px;
+  }
+  .nav__item_type_signup{
+    min-width: 54px;
+    max-height: 26px;
   }
 }

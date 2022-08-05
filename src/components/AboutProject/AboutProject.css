@@ -5,7 +5,8 @@
   min-height: 608px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 110px 70px 110px 70px;
+  padding: 110px 0 110px 0;
+  width: calc(100% - 70px *2);
 }
 .about-project__content{
   display: grid;
@@ -89,4 +90,29 @@
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+@media screen and (max-width: 1000px){
+  .about-project{
+    width: calc(100% - 50px * 2);
+  }
+}
+@media screen and (max-width: 800px){
+  .about-project__heading{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    max-width: 319px;
+  }
+  .about-project__subheading{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    max-width: 319px;
+  }
+}
+@media screen and (max-width: 600px){
+
+}
+@media screen and (max-width: 450px){
+
 }

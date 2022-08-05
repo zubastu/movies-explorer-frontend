@@ -7,7 +7,7 @@ const Navigation = () => {
   return (
     <>
       {location.pathname === "/" && (
-        <nav className="nav">
+        <nav className="nav-landing">
           <div className="nav__auth-container">
             <NavLink to="/signup" className="nav__item nav__item_type_signup">
               Регистрация

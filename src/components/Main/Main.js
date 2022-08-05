@@ -11,9 +11,9 @@ const Main = ({ setMenuActive }) => {
   return (
     <>
       <Header setMenuActive={setMenuActive} />
-      <Promo />
-      {/*   <AboutProject />
-      <Techs />
+      {/*      <Promo />*/}
+      <AboutProject />
+      {/*<Techs />
       <AboutMe />
       <Portfolio />*/}
       <Footer />

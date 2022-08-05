@@ -13,8 +13,8 @@ const Main = ({ setMenuActive }) => {
       <Header setMenuActive={setMenuActive} />
       <Promo />
       <AboutProject />
-      {/*<Techs />
-      <AboutMe />
+      <Techs />
+      {/*      <AboutMe />
       <Portfolio />*/}
       <Footer />
     </>

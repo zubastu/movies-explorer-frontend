@@ -8,20 +8,25 @@ const AboutProject = () => {
       <MainTitle text="О проекте" />
 
       <div className="about-project__content">
-        <h4 className="about-project__heading">
-          Дипломный проект включал 5 этапов
-        </h4>
-        <h4 className="about-project__heading">
-          На выполнение диплома ушло 5 недель
-        </h4>
-        <p className="about-project__subheading">
-          Составление плана, работу над бэкендом, вёрстку, добавление
-          функциональности и финальные доработки.
-        </p>
-        <p className="about-project__subheading">
-          У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
-          соблюдать, чтобы успешно защититься.
-        </p>
+        <div className="about-project__section">
+          <h4 className="about-project__heading">
+            Дипломный проект включал 5 этапов
+          </h4>
+          <p className="about-project__subheading">
+            Составление плана, работу над бэкендом, вёрстку, добавление
+            функциональности и финальные доработки.
+          </p>
+        </div>
+
+        <div className="about-project__section">
+          <h4 className="about-project__heading">
+            На выполнение диплома ушло 5 недель
+          </h4>
+          <p className="about-project__subheading">
+            У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
+            соблюдать, чтобы успешно защититься.
+          </p>
+        </div>
       </div>
 
       <div className="time-line">

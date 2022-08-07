@@ -99,6 +99,7 @@
   .techs{
     padding: 70px 18px 70px 18px;
     gap: 60px;
+    background: #FFFFFF;
   }
   .tech__content{
     gap: 50px;

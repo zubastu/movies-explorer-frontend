@@ -12,6 +12,7 @@ const SearchForm = () => {
           <input
             className="form__input form__input_type_search"
             placeholder="Фильм"
+            required={true}
           />
           <button
             type="submit"

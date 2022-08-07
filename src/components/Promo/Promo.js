@@ -9,13 +9,13 @@ const Promo = () => {
         Учебный проект студента факультета Веб-разработки.
       </h1>
       <nav className="promo__nav-container">
-        <Link to={"about-section"} className="promo__nav-item">
+        <Link to={"about-section"} className="promo__nav-item hover-link">
           О проекте
         </Link>
-        <Link to={"tech-section"} className="promo__nav-item">
+        <Link to={"tech-section"} className="promo__nav-item hover-link">
           Технологии
         </Link>
-        <Link to={"student-section"} className="promo__nav-item">
+        <Link to={"student-section"} className="promo__nav-item hover-link">
           Студент
         </Link>
       </nav>

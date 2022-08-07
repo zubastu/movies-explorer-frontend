@@ -12,7 +12,7 @@ const NotFound = () => {
         <h2 className="not-found__heading">404</h2>
         <p className="not-found__subheading">Страница не найдена</p>
       </div>
-      <p className="not-found__go-back" onClick={goBack}>
+      <p className="not-found__go-back hover-link" onClick={goBack}>
         Назад
       </p>
     </div>

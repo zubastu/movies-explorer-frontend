@@ -44,6 +44,11 @@
   outline: none;
   background: #F9F9F9;
   transition: .5s ease;
+  cursor:pointer;
+}
+.movie-card__input:hover{
+  background: #2BE080;
+  opacity: .5;
 }
 .movie-card__input:checked{
   background-color: #2BE080;

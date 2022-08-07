@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
+  width: 100%;
 }
 .portfolio__heading{
   color: #A0A0A0;

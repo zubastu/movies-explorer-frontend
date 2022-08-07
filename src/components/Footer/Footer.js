@@ -11,16 +11,24 @@ const Footer = () => {
         <p className="footer__copyright">&copy;2022</p>
         <nav className="footer__nav">
           <a
-            className="nav__link"
+            className="nav__link hover-link"
             href="https://practicum.yandex.ru/"
             target="_blank"
           >
             Яндекс.Практикум
           </a>
-          <a className="nav__link" href="https://github.com/" target="_blank">
+          <a
+            className="nav__link hover-link"
+            href="https://github.com/"
+            target="_blank"
+          >
             Github
           </a>
-          <a className="nav__link" href="https://facebook.com/" target="_blank">
+          <a
+            className="nav__link hover-link"
+            href="https://facebook.com/"
+            target="_blank"
+          >
             Facebook
           </a>
         </nav>

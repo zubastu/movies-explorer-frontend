@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 90px;
+  width: 100%;
 }
 .tech__content{
   display: flex;

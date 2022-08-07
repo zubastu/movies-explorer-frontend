@@ -27,19 +27,19 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
         }
       >
         <button
-          className="navigation-popup__close"
+          className="navigation-popup__close hover-button"
           onClick={() => setMenuActive(false)}
         />
         <nav className="navigation-popup__navigation-container">
-          <NavLink to="/" className="navigation-popup__link">
+          <NavLink to="/" className="navigation-popup__link hover-link">
             Главная
           </NavLink>
           <NavLink
             to="/movies"
             className={
               location.pathname === "/movies"
-                ? "navigation-popup__link navigation-popup__link_type_active"
-                : "navigation-popup__link"
+                ? "navigation-popup__link navigation-popup__link_type_active hover-link"
+                : "navigation-popup__link hover-link"
             }
           >
             Фильмы
@@ -48,8 +48,8 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
-                ? "navigation-popup__link navigation-popup__link_type_active"
-                : "navigation-popup__link"
+                ? "navigation-popup__link navigation-popup__link_type_active hover-link"
+                : "navigation-popup__link hover-link"
             }
           >
             Сохраненные фильмы
@@ -57,7 +57,7 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
         </nav>
         <NavLink
           to="/profile"
-          className="navigation-popup__link navigation-popup__link_type_account"
+          className="navigation-popup__link navigation-popup__link_type_account hover-button"
         >
           Аккаунт
         </NavLink>

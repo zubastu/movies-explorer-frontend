@@ -9,10 +9,16 @@ const Navigation = () => {
       {location.pathname === "/" && (
         <nav className="nav-landing">
           <div className="nav__auth-container">
-            <NavLink to="/signup" className="nav__item nav__item_type_signup">
+            <NavLink
+              to="/signup"
+              className="nav__item nav__item_type_signup hover-link"
+            >
               Регистрация
             </NavLink>
-            <NavLink to="/signin" className="nav__item nav__item_type_signin">
+            <NavLink
+              to="/signin"
+              className="nav__item nav__item_type_signin hover-button"
+            >
               Войти
             </NavLink>
           </div>
@@ -21,24 +27,30 @@ const Navigation = () => {
       {location.pathname === "/movies" && (
         <nav className="nav-movies">
           <div className="nav__item-container">
-            <NavLink to="/" className="nav__item nav__item_type_main">
+            <NavLink
+              to="/"
+              className="nav__item nav__item_type_main hover-link"
+            >
               Главная
             </NavLink>
             <NavLink
               to="/movies"
-              className="nav__item nav__item_type_films nav__item_type_active"
+              className="nav__item nav__item_type_films nav__item_type_active hover-link"
             >
               Фильмы
             </NavLink>
             <NavLink
               to="/saved-movies"
-              className="nav__item nav__item_type_saved-films"
+              className="nav__item nav__item_type_saved-films hover-link"
             >
               Сохраненные фильмы
             </NavLink>
           </div>
 
-          <NavLink to="/profile" className="nav__item nav__item_type_account">
+          <NavLink
+            to="/profile"
+            className="nav__item nav__item_type_account hover-button"
+          >
             Аккаунт
           </NavLink>
         </nav>
@@ -46,20 +58,29 @@ const Navigation = () => {
       {location.pathname === "/saved-movies" && (
         <nav className="nav-movies">
           <div className="nav__item-container">
-            <NavLink to="/" className="nav__item nav__item_type_main">
+            <NavLink
+              to="/"
+              className="nav__item nav__item_type_main hover-link"
+            >
               Главная
             </NavLink>
-            <NavLink to="/movies" className="nav__item nav__item_type_films">
+            <NavLink
+              to="/movies"
+              className="nav__item nav__item_type_films hover-link"
+            >
               Фильмы
             </NavLink>
             <NavLink
               to="/saved-movies"
-              className="nav__item nav__item_type_saved-films nav__item_type_active"
+              className="nav__item nav__item_type_saved-films nav__item_type_active hover-link"
             >
               Сохраненные фильмы
             </NavLink>
           </div>
-          <NavLink to="/profile" className="nav__item nav__item_type_account">
+          <NavLink
+            to="/profile"
+            className="nav__item nav__item_type_account hover-button"
+          >
             Аккаунт
           </NavLink>
         </nav>
@@ -67,20 +88,29 @@ const Navigation = () => {
       {location.pathname === "/profile" && (
         <nav className="nav-movies">
           <div className="nav__item-container">
-            <NavLink to="/" className="nav__item nav__item_type_main">
+            <NavLink
+              to="/"
+              className="nav__item nav__item_type_main hover-link"
+            >
               Главная
             </NavLink>
-            <NavLink to="/movies" className="nav__item nav__item_type_films">
+            <NavLink
+              to="/movies"
+              className="nav__item nav__item_type_films hover-link"
+            >
               Фильмы
             </NavLink>
             <NavLink
               to="/saved-movies"
-              className="nav__item nav__item_type_saved-films"
+              className="nav__item nav__item_type_saved-films hover-link"
             >
               Сохраненные фильмы
             </NavLink>
           </div>
-          <NavLink to="/profile" className="nav__item nav__item_type_account">
+          <NavLink
+            to="/profile"
+            className="nav__item nav__item_type_account hover-button"
+          >
             Аккаунт
           </NavLink>
         </nav>

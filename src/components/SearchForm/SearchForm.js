@@ -16,7 +16,7 @@ const SearchForm = () => {
           />
           <button
             type="submit"
-            className="form__submit form__submit_type_search"
+            className="form__submit form__submit_type_search hover-button"
           />
         </fieldset>
       </form>

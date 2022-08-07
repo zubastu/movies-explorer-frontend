@@ -11,6 +11,7 @@ const Form = ({ formName }) => {
             <input
               type="email"
               className={`form__input form__input_type_${formName}`}
+              required={true}
             />
             <span className="form__error-span">Что то не так</span>
           </label>
@@ -20,6 +21,7 @@ const Form = ({ formName }) => {
               type="password"
               autoComplete="true"
               className={`form__input form__input_type_${formName}`}
+              required={true}
             />
             <span className="form__error-span">Что то не так</span>
           </label>
@@ -27,7 +29,7 @@ const Form = ({ formName }) => {
 
         <button
           type="submit"
-          className={`form__submit form__submit_type_${formName}`}
+          className={`form__submit form__submit_type_${formName} hover-button`}
         >
           Войти
         </button>
@@ -41,19 +43,26 @@ const Form = ({ formName }) => {
         <fieldset className="form__field form__field__type_auth">
           <label className="form__label">
             Имя
-            <input className={`form__input form__input_type_${formName}`} />
+            <input
+              className={`form__input form__input_type_${formName}`}
+              required={true}
+            />
             <span className="form__error-span">Что-то пошло не так...</span>
           </label>
 
           <label className="form__label">
             E-mail
-            <input className={`form__input form__input_type_${formName}`} />
+            <input
+              className={`form__input form__input_type_${formName}`}
+              required={true}
+            />
             <span className="form__error-span">Что-то пошло не так...</span>
           </label>
 
           <label className="form__label">
             Пароль
             <input
+              required={true}
               autoComplete="true"
               type="password"
               className={`form__input form__input_type_${formName}`}
@@ -64,7 +73,7 @@ const Form = ({ formName }) => {
 
         <button
           type="submit"
-          className={`form__submit form__submit_type_${formName}`}
+          className={`form__submit form__submit_type_${formName} hover-button`}
         >
           Зарегистрироваться
         </button>

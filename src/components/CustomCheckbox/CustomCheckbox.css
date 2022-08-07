@@ -28,6 +28,10 @@
   transition: .5s ease;
   cursor: pointer;
 }
+.custom-checkbox__input:hover{
+  background: #2BE080;
+  opacity: .5;
+}
 .custom-checkbox__input:checked{
   background: #2BE080;
   margin: 0;

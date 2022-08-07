@@ -8,7 +8,7 @@ const AuthNav = ({ type }) => {
       {type === "login" && (
         <p className="auth-navigation__text">
           Ещё не зарегистрированы?
-          <Link className="auth-navigation__link" to="/signup">
+          <Link className="auth-navigation__link hover-link" to="/signup">
             Регистрация
           </Link>
         </p>
@@ -16,7 +16,7 @@ const AuthNav = ({ type }) => {
       {type === "register" && (
         <p className="auth-navigation__text">
           Уже зарегистрированы?
-          <Link className="auth-navigation__link" to="/signin">
+          <Link className="auth-navigation__link hover-link" to="/signin">
             Войти
           </Link>
         </p>

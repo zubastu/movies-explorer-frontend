@@ -20,7 +20,7 @@ const AboutMeAboutMe = () => {
           <ul className="links">
             <li className="links__item">
               <a
-                className="links__link"
+                className="links__link hover-link"
                 href="https://facebook.com/"
                 target="_blank"
               >
@@ -29,7 +29,7 @@ const AboutMeAboutMe = () => {
             </li>
             <li className="links__item">
               <a
-                className="links__link"
+                className="links__link hover-link"
                 href="https://github.com/zubastu"
                 target="_blank"
               >

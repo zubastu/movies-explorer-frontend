@@ -10,7 +10,7 @@ const Portfolio = () => {
           <a
             href="https://zubastu.github.io/how-to-learn/"
             target="_blank"
-            className="portfolio-links__link"
+            className="portfolio-links__link hover-link"
           >
             <p className="portfolio-links__text">Статичный сайт</p>
             <span className="portfolio-links__arrow">↗</span>
@@ -19,7 +19,7 @@ const Portfolio = () => {
 
         <li className="portfolio-links__item">
           <a
-            className="portfolio-links__link"
+            className="portfolio-links__link hover-link"
             href="https://zubastu.github.io/russian-travel/"
             target="_blank"
           >
@@ -30,7 +30,7 @@ const Portfolio = () => {
 
         <li className="portfolio-links__item">
           <a
-            className="portfolio-links__link"
+            className="portfolio-links__link hover-link"
             href="https://zubastu.nomoredomains.xyz/"
             target="_blank"
           >

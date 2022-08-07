@@ -12,7 +12,7 @@ const Header = ({ setMenuActive }) => {
       <Navigation />
       {location.pathname !== "/" && (
         <button
-          className="header__burger-button"
+          className="header__burger-button hover-button"
           onClick={() => setMenuActive(true)}
         />
       )}

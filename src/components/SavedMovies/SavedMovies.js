@@ -9,11 +9,13 @@ const SavedMovies = ({ setMenuActive }) => {
   return (
     <section className="saved-movies">
       <Header setMenuActive={setMenuActive} />
-      <div className="search-container">
-        <SearchForm />
-      </div>
-      <MoviesCardList />
-      <div className="more-button-container"></div>
+      <main className="main">
+        <div className="search-container">
+          <SearchForm />
+        </div>
+        <MoviesCardList />
+        <div className="more-button-container"></div>
+      </main>
       <Footer />
     </section>
   );

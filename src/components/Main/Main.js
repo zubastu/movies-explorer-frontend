@@ -1,4 +1,5 @@
 import React from "react";
+import "./Main.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Promo from "../Promo/Promo";
@@ -11,11 +12,13 @@ const Main = ({ setMenuActive }) => {
   return (
     <>
       <Header setMenuActive={setMenuActive} />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
       <Footer />
     </>
   );

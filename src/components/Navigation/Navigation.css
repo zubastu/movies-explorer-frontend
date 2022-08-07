@@ -75,7 +75,7 @@
   justify-self: flex-end;
 }
 .nav__item_type_main{
-  visibility: hidden;
+  display: none;
 }
 
 @media screen and (max-width: 800px){
@@ -84,6 +84,9 @@
   }
   .nav-movies{
     display: none;
+  }
+  .nav__item_type_main{
+    display: block;
   }
 }
 @media screen and (max-width: 500px){

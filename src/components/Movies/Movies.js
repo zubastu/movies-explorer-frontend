@@ -9,17 +9,18 @@ const Movies = ({ setMenuActive }) => {
   return (
     <section className="movies">
       <Header setMenuActive={setMenuActive} />
-      <div className="search-container">
-        <SearchForm />
-      </div>
+      <main className="main">
+        <div className="search-container">
+          <SearchForm />
+        </div>
 
-      <MoviesCardList />
-      <div className="more-button-container">
-        <button className="load-more-btn" type="button">
-          Ещё
-        </button>
-      </div>
-
+        <MoviesCardList />
+        <div className="more-button-container">
+          <button className="load-more-btn" type="button">
+            Ещё
+          </button>
+        </div>
+      </main>
       <Footer />
     </section>
   );

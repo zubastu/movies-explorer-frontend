@@ -1,0 +1,20 @@
+.title-container{
+  border-bottom: 1px solid #000000;
+  min-width: 100%;
+  min-height: 50px;
+}
+.main-title{
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+}
+@media screen and (max-width: 450px){
+  .main-title{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+}

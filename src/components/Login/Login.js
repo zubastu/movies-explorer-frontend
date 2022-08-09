@@ -7,9 +7,9 @@ import AuthNav from "../AuthNav/AuthNav";
 const Login = () => {
   return (
     <section className="login">
-      <AuthTitle title={"Рады видеть!"} />
+      <AuthTitle title="Рады видеть!" />
       <Form formName="login" />
-      <AuthNav type={"login"} />
+      <AuthNav type="login" />
     </section>
   );
 };

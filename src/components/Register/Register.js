@@ -1,14 +1,14 @@
 import React from "react";
 import "./Register.css";
 import AuthTitle from "../AuthTitle/AuthTitle";
-import Form from "../Form/Form";
 import AuthNav from "../AuthNav/AuthNav";
+import RegisterForm from "../RegisterForm/RegisterForm";
 
 const Register = () => {
   return (
     <section className="register">
       <AuthTitle title={"Добро пожаловать!"} />
-      <Form formName="register" />
+      <RegisterForm formName="register" />
       <AuthNav type="register" />
     </section>
   );

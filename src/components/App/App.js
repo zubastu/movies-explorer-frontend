@@ -32,7 +32,11 @@ function App() {
 
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
   const closeBurgerMenu = () => setState({ ...state, menuActive: false });
+
   const closeTooltip = () => setState({ ...state, tooltipActive: false });
+
+  const openProfileModal = () =>
+    setState({ ...state, profileModalActive: true });
   const closeProfileModal = () =>
     setState({ ...state, profileModalActive: false });
 
@@ -66,6 +70,7 @@ function App() {
               openBurgerMenu={openBurgerMenu}
               closeProfileModal={closeProfileModal}
               profileModalActive={profileModalActive}
+              openProfileModal={openProfileModal}
             />
           }
         />

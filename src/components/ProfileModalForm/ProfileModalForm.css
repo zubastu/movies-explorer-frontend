@@ -71,5 +71,6 @@
   .form-profile{
     padding: 50px 15px;
     max-width: 260px;
+    max-height: 380px;
   }
 }

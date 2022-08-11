@@ -3,7 +3,12 @@ import "./Profile.css";
 import Header from "../Header/Header";
 import ProfileModalForm from "../ProfileModalForm/ProfileModalForm";
 
-const Profile = ({ openBurgerMenu, profileModalActive, closeProfileModal }) => {
+const Profile = ({
+  openBurgerMenu,
+  profileModalActive,
+  closeProfileModal,
+  openProfileModal,
+}) => {
   const user = {
     name: "Виталий",
     email: "simple@mail.com",
@@ -29,8 +34,15 @@ const Profile = ({ openBurgerMenu, profileModalActive, closeProfileModal }) => {
             </div>
           </div>
           <div className="profile__buttons">
-            <button className="profile__btn-change">Редактировать</button>
-            <button className="profile__btn-out">Выйти из аккаунта</button>
+            <button
+              className="profile__btn-change hover-button"
+              onClick={() => openProfileModal()}
+            >
+              Редактировать
+            </button>
+            <button className="profile__btn-out hover-button">
+              Выйти из аккаунта
+            </button>
           </div>
         </section>
       </main>

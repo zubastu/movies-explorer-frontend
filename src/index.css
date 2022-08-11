@@ -12,19 +12,19 @@
 }
 .hover-button{
   opacity: 1;
-  transition: .5s ease;
+  transition: opacity .5s ease;
   cursor:pointer;
 }
 .hover-button:hover{
   opacity: .3;
-  transition: .5s ease;
+  transition: opacity .5s ease;
 }
 .hover-link{
   opacity: 1;
-  transition: .5s ease;
+  transition: opacity.5s ease;
   cursor:pointer;
 }
 .hover-link:hover{
   opacity: .2;
-  transition: .5s ease;
+  transition: opacity .5s ease;
 }

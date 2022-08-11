@@ -2,7 +2,7 @@ import React from "react";
 import "./NavigationPopup.css";
 import { NavLink, useLocation } from "react-router-dom";
 
-const NavigationPopup = ({ menuActive, setMenuActive }) => {
+const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
   const location = useLocation();
   return (
     <div
@@ -28,7 +28,7 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
       >
         <button
           className="navigation-popup__close hover-button"
-          onClick={() => setMenuActive(false)}
+          onClick={() => closeBurgerMenu()}
         />
         <nav className="navigation-popup__navigation-container">
           <NavLink to="/" className="navigation-popup__link hover-link">

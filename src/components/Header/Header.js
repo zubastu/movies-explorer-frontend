@@ -4,7 +4,7 @@ import "./Header.css";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 
-const Header = ({ setMenuActive }) => {
+const Header = ({ openBurgerMenu }) => {
   const location = useLocation();
   return (
     <header className="header">
@@ -13,7 +13,7 @@ const Header = ({ setMenuActive }) => {
       {location.pathname !== "/" && (
         <button
           className="header__burger-button hover-button"
-          onClick={() => setMenuActive(true)}
+          onClick={() => openBurgerMenu()}
         />
       )}
     </header>

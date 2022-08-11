@@ -9,26 +9,55 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
+import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 
 function App() {
-  const [menuActive, setMenuActive] = useState(false);
+  const [state, setState] = useState({
+    menuActive: false,
+    preloaderActive: false,
+    tooltipActive: true,
+    tooltipSuccess: false,
+    tooltipContent: "",
+  });
+
+  const {
+    menuActive,
+    preloaderActive,
+    tooltipActive,
+    tooltipSuccess,
+    tooltipContent,
+  } = state;
+
+  const openBurgerMenu = () => setState({ ...state, menuActive: true });
+  const closeBurgerMenu = () => setState({ ...state, menuActive: false });
+  const closeTooltip = () => setState({ ...state, tooltipActive: false });
+
   return (
     <>
-      <Preloader active={false} />
-      <NavigationPopup menuActive={menuActive} setMenuActive={setMenuActive} />
+      <TooltipModalWindow
+        isSuccess={tooltipSuccess}
+        isActive={tooltipActive}
+        closePopup={closeTooltip}
+        tooltipContent={tooltipContent}
+      />
+      <Preloader preloaderActive={preloaderActive} />
+      <NavigationPopup
+        menuActive={menuActive}
+        closeBurgerMenu={closeBurgerMenu}
+      />
       <Routes>
-        <Route path="/" element={<Main setMenuActive={setMenuActive} />} />
+        <Route path="/" element={<Main openBurgerMenu={openBurgerMenu} />} />
         <Route
           path="/movies"
-          element={<Movies setMenuActive={setMenuActive} />}
+          element={<Movies openBurgerMenu={openBurgerMenu} />}
         />
         <Route
           path="/saved-movies"
-          element={<SavedMovies setMenuActive={setMenuActive} />}
+          element={<SavedMovies openBurgerMenu={openBurgerMenu} />}
         />
         <Route
           path="/profile"
-          element={<Profile setMenuActive={setMenuActive} />}
+          element={<Profile openBurgerMenu={openBurgerMenu} />}
         />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

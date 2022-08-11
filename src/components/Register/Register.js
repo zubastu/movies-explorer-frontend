@@ -8,7 +8,7 @@ const Register = () => {
   return (
     <section className="register">
       <AuthTitle title={"Добро пожаловать!"} />
-      <RegisterForm formName="register" />
+      <RegisterForm />
       <AuthNav type="register" />
     </section>
   );

@@ -8,10 +8,10 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-const Main = ({ setMenuActive }) => {
+const Main = ({ openBurgerMenu }) => {
   return (
     <>
-      <Header setMenuActive={setMenuActive} />
+      <Header openBurgerMenu={openBurgerMenu} />
       <main className="main">
         <Promo />
         <AboutProject />

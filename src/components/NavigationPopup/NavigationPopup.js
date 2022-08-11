@@ -4,28 +4,21 @@ import { NavLink, useLocation } from "react-router-dom";
 
 const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
   const location = useLocation();
+
+  const popupClassName = `navigation-popup ${
+    menuActive && "navigation-popup_type_active"
+  }`;
+  const overlayClassName = `navigation-popup__overlay  ${
+    menuActive && "navigation-popup__overlay_type_active"
+  }`;
+  const popupNavLinksClassName = `navigation-popup__links  ${
+    menuActive && "navigation-popup__links_type_active"
+  }`;
+
   return (
-    <div
-      className={
-        menuActive
-          ? "navigation-popup navigation-popup_type_active"
-          : "navigation-popup"
-      }
-    >
-      <div
-        className={
-          menuActive
-            ? "navigation-popup__overlay navigation-popup__overlay_type_active"
-            : "navigation-popup__overlay"
-        }
-      ></div>
-      <div
-        className={
-          menuActive
-            ? "navigation-popup__links navigation-popup__links_type_active"
-            : "navigation-popup__links"
-        }
-      >
+    <div className={popupClassName}>
+      <div className={overlayClassName} onClick={() => closeBurgerMenu()} />
+      <div className={popupNavLinksClassName}>
         <button
           className="navigation-popup__close hover-button"
           onClick={() => closeBurgerMenu()}

@@ -8,10 +8,10 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-const Main = ({ openBurgerMenu }) => {
+const Main = ({ openBurgerMenu, isLoggedIn }) => {
   return (
     <>
-      <Header openBurgerMenu={openBurgerMenu} />
+      <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <Promo />
         <AboutProject />

@@ -31,7 +31,14 @@ const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
           onClick={() => closeBurgerMenu()}
         />
         <nav className="navigation-popup__navigation-container">
-          <NavLink to="/" className="navigation-popup__link hover-link">
+          <NavLink
+            to="/"
+            className={
+              location.pathname === "/"
+                ? "navigation-popup__link navigation-popup__link_type_active hover-link"
+                : "navigation-popup__link hover-link"
+            }
+          >
             Главная
           </NavLink>
           <NavLink

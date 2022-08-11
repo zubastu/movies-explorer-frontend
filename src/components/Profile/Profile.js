@@ -8,6 +8,7 @@ const Profile = ({
   profileModalActive,
   closeProfileModal,
   openProfileModal,
+  isLoggedIn,
 }) => {
   const user = {
     name: "Виталий",
@@ -19,7 +20,7 @@ const Profile = ({
         closePopup={closeProfileModal}
         isActive={profileModalActive}
       />
-      <Header openBurgerMenu={openBurgerMenu} />
+      <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <section className="profile">
           <h3 className="profile__heading">{`Привет, ${user.name}!`}</h3>

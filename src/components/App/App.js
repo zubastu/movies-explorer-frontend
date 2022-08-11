@@ -19,6 +19,7 @@ function App() {
     tooltipSuccess: false,
     tooltipContent: "",
     profileModalActive: true,
+    isLoggedIn: true,
   });
 
   const {
@@ -28,6 +29,7 @@ function App() {
     tooltipSuccess,
     tooltipContent,
     profileModalActive,
+    isLoggedIn,
   } = state;
 
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
@@ -54,14 +56,26 @@ function App() {
         closeBurgerMenu={closeBurgerMenu}
       />
       <Routes>
-        <Route path="/" element={<Main openBurgerMenu={openBurgerMenu} />} />
+        <Route
+          path="/"
+          element={
+            <Main openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
+          }
+        />
         <Route
           path="/movies"
-          element={<Movies openBurgerMenu={openBurgerMenu} />}
+          element={
+            <Movies openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
+          }
         />
         <Route
           path="/saved-movies"
-          element={<SavedMovies openBurgerMenu={openBurgerMenu} />}
+          element={
+            <SavedMovies
+              openBurgerMenu={openBurgerMenu}
+              isLoggedIn={isLoggedIn}
+            />
+          }
         />
         <Route
           path="/profile"
@@ -71,6 +85,7 @@ function App() {
               closeProfileModal={closeProfileModal}
               profileModalActive={profileModalActive}
               openProfileModal={openProfileModal}
+              isLoggedIn={isLoggedIn}
             />
           }
         />

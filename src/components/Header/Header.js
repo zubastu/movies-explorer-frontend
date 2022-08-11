@@ -1,16 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 
-const Header = ({ openBurgerMenu }) => {
-  const location = useLocation();
+const Header = ({ openBurgerMenu, isLoggedIn }) => {
   return (
     <header className="header">
       <img className="logo" alt="Логотип" src={logo} />
-      <Navigation />
-      {location.pathname !== "/" && (
+      <Navigation isLoggedIn={isLoggedIn} />
+
+      {isLoggedIn && (
         <button
           className="header__burger-button hover-button"
           onClick={() => openBurgerMenu()}

@@ -1,23 +1,7 @@
-.nav{
-  display: grid;
-  margin:0;
-  gap: 30px;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  justify-content: space-between;
-}
-.nav-landing{
-  display: grid;
-  margin:0;
-  gap: 30px;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  justify-content: flex-end;
-}
 .nav-movies{
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .nav__item{
   text-decoration: none;
@@ -32,8 +16,13 @@
 }
 .nav__item-container{
   display: flex;
-  gap: 30px;
   margin: 0 0 0 44px;
+  width: 100%;
+  justify-content: space-between;
+}
+.nav__item-container__movies-links{
+  display: flex;
+  gap: 30px;
 }
 .nav__auth-container{
   display: flex;
@@ -79,10 +68,7 @@
 }
 
 @media screen and (max-width: 800px){
-  .nav{
-    display: none;
-  }
-  .nav-movies{
+  .nav__item-container{
     display: none;
   }
   .nav__item_type_main{

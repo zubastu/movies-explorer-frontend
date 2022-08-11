@@ -5,10 +5,10 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-const Movies = ({ openBurgerMenu }) => {
+const Movies = ({ openBurgerMenu, isLoggedIn }) => {
   return (
     <section className="movies">
-      <Header openBurgerMenu={openBurgerMenu} />
+      <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
           <SearchForm />

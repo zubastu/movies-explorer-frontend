@@ -15,9 +15,10 @@ function App() {
   const [state, setState] = useState({
     menuActive: false,
     preloaderActive: false,
-    tooltipActive: true,
+    tooltipActive: false,
     tooltipSuccess: false,
     tooltipContent: "",
+    profileModalActive: true,
   });
 
   const {
@@ -26,11 +27,14 @@ function App() {
     tooltipActive,
     tooltipSuccess,
     tooltipContent,
+    profileModalActive,
   } = state;
 
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
   const closeBurgerMenu = () => setState({ ...state, menuActive: false });
   const closeTooltip = () => setState({ ...state, tooltipActive: false });
+  const closeProfileModal = () =>
+    setState({ ...state, profileModalActive: false });
 
   return (
     <>
@@ -57,7 +61,13 @@ function App() {
         />
         <Route
           path="/profile"
-          element={<Profile openBurgerMenu={openBurgerMenu} />}
+          element={
+            <Profile
+              openBurgerMenu={openBurgerMenu}
+              closeProfileModal={closeProfileModal}
+              profileModalActive={profileModalActive}
+            />
+          }
         />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

@@ -1,14 +1,19 @@
 import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
+import ProfileModalForm from "../ProfileModalForm/ProfileModalForm";
 
-const Profile = ({ openBurgerMenu }) => {
+const Profile = ({ openBurgerMenu, profileModalActive, closeProfileModal }) => {
   const user = {
     name: "Виталий",
     email: "simple@mail.com",
   };
   return (
     <>
+      <ProfileModalForm
+        closePopup={closeProfileModal}
+        isActive={profileModalActive}
+      />
       <Header openBurgerMenu={openBurgerMenu} />
       <main className="main">
         <section className="profile">

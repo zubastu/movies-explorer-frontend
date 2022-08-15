@@ -3,14 +3,19 @@ import "./SearchForm.css";
 import searchIcon from "../../images/search-icon.svg";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { useForm } from "../useForm";
+import { useFilter } from "../useFilter";
 
-const SearchForm = () => {
+const SearchForm = ({ setMovies }) => {
   const { values, handleChange, isValid, resetForm } = useForm();
   const { searchInput } = values;
+  const { filterMovies } = useFilter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(searchInput);
+    const filteredMovies = filterMovies(searchInput);
+    console.log(filteredMovies);
+    setMovies(filteredMovies);
     resetForm();
   };
 

@@ -5,16 +5,16 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-const Movies = ({ openBurgerMenu, isLoggedIn }) => {
+const Movies = ({ openBurgerMenu, isLoggedIn, moviesList, setMovies }) => {
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
-          <SearchForm />
+          <SearchForm setMovies={setMovies} />
         </div>
 
-        <MoviesCardList />
+        <MoviesCardList moviesList={moviesList} />
         <div className="more-button-container">
           <button className="load-more-btn" type="button">
             Ещё

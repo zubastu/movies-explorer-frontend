@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-const SavedMovies = ({ openBurgerMenu, isLoggedIn }) => {
+const SavedMovies = ({ openBurgerMenu, isLoggedIn, savedMovies }) => {
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
@@ -13,7 +13,7 @@ const SavedMovies = ({ openBurgerMenu, isLoggedIn }) => {
         <div className="search-container">
           <SearchForm />
         </div>
-        <MoviesCardList />
+        <MoviesCardList moviesList={savedMovies} />
         <div className="more-button-container"></div>
       </main>
       <Footer />

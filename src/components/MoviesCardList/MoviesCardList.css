@@ -30,7 +30,14 @@
 @media screen and (max-width:760px) {
   .movies-card-list{
     grid-template-columns: minmax(min-content, max-content);
-    grid-auto-rows: 1fr;
+    grid-template-rows: 1fr;
     justify-content: center;
+  }
+}
+@media screen and (max-width:360px) {
+  .movies-card-list{
+    max-width: 300px;
+    box-sizing: border-box;
+    column-gap: 0;
   }
 }

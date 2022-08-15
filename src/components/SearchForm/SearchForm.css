@@ -54,6 +54,7 @@
   .search-form{
     flex-direction: column;
     border-radius: 9px;
+    max-width: 100%;
   }
   .search-icon{
     display: none;

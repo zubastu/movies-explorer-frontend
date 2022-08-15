@@ -28,23 +28,38 @@ const Navigation = ({ isLoggedIn }) => {
             <div className="nav__item-container__movies-links">
               <NavLink
                 to="/"
-                className="nav__item nav__item_type_main hover-link"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav__item nav__item_type_main hover-link nav__item_type_active"
+                    : "nav__item nav__item_type_main hover-link"
+                }
               >
                 Главная
               </NavLink>
+
               <NavLink
                 to="/movies"
-                className="nav__item nav__item_type_films nav__item_type_active hover-link"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav__item nav__item_type_films hover-link nav__item_type_active"
+                    : "nav__item nav__item_type_films hover-link"
+                }
               >
                 Фильмы
               </NavLink>
+
               <NavLink
                 to="/saved-movies"
-                className="nav__item nav__item_type_saved-films hover-link"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav__item nav__item_type_saved-films hover-link nav__item_type_active"
+                    : "nav__item nav__item_type_saved-films hover-link"
+                }
               >
                 Сохраненные фильмы
               </NavLink>
             </div>
+
             <NavLink
               to="/profile"
               className="nav__item nav__item_type_account hover-button"

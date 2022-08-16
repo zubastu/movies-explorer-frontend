@@ -4,11 +4,11 @@ import AuthTitle from "../AuthTitle/AuthTitle";
 import AuthNav from "../AuthNav/AuthNav";
 import RegisterForm from "../RegisterForm/RegisterForm";
 
-const Register = () => {
+const Register = ({ onRegister }) => {
   return (
     <section className="register">
       <AuthTitle title={"Добро пожаловать!"} />
-      <RegisterForm />
+      <RegisterForm onRegister={onRegister} />
       <AuthNav type="register" />
     </section>
   );

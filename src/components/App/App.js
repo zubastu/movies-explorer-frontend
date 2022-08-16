@@ -10,6 +10,7 @@ import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
+import { mainApi } from "../../utils/MainApi";
 
 function App() {
   const [state, setState] = useState({
@@ -54,6 +55,13 @@ function App() {
     setState({ ...state, profileModalActive: false });
 
   const setMovies = (movies) => setState({ ...state, moviesList: movies });
+
+  const onRegister = (name, email, password) => {
+    mainApi
+      .register(name, email, password)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  };
 
   return (
     <>
@@ -108,7 +116,7 @@ function App() {
           }
         />
         <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="/signup" element={<Register onRegister={onRegister} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

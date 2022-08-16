@@ -2,13 +2,13 @@ import React from "react";
 import "./RegisterForm.css";
 import { useForm } from "../useForm";
 
-const RegisterForm = () => {
+const RegisterForm = ({ onRegister }) => {
   const { values, resetForm, errors, handleChange, isValid } = useForm();
   const { name, email, password } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, password);
+    onRegister(name, email, password);
     resetForm();
   };
   return (

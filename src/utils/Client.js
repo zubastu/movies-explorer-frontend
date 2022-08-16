@@ -68,4 +68,15 @@ export default class Client {
     });
     return this._checkPromise(promise);
   }
+  postAuth(type, data) {
+    const promise = fetch(`${this._url}${type}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json: charset=utf-8",
+      },
+      body: JSON.stringify(data),
+    });
+    return this._checkPromise(promise);
+  }
 }

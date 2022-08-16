@@ -34,6 +34,14 @@ function App() {
     moviesList,
   } = state;
 
+  const showErrorPopup = (e) =>
+    setState({
+      ...state,
+      tooltipSuccess: false,
+      tooltipActive: true,
+      tooltipContent: `${e.status} ${e.message}`,
+    });
+
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
   const closeBurgerMenu = () => setState({ ...state, menuActive: false });
 
@@ -73,8 +81,8 @@ function App() {
             <Movies
               openBurgerMenu={openBurgerMenu}
               isLoggedIn={isLoggedIn}
-              moviesList={moviesList}
               setMovies={setMovies}
+              moviesList={moviesList}
             />
           }
         />

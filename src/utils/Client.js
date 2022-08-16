@@ -32,7 +32,40 @@ export default class Client {
     });
     return this._checkPromise(promise);
   }
-  post() {}
-  patch() {}
-  delete() {}
+
+  post(type) {
+    const promise = fetch(`${this._url}${type}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json: charset=utf-8",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+    return this._checkPromise(promise);
+  }
+
+  patch(type) {
+    const promise = fetch(`${this._url}${type}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json: charset=utf-8",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+    return this._checkPromise(promise);
+  }
+
+  delete(type) {
+    const promise = fetch(`${this._url}${type}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json: charset=utf-8",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+    return this._checkPromise(promise);
+  }
 }

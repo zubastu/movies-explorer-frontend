@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import searchIcon from "../../images/search-icon.svg";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
@@ -6,17 +6,20 @@ import { useForm } from "../useForm";
 import { useFilter } from "../useFilter";
 
 const SearchForm = ({ setMovies }) => {
+  const [isShort, setIsShort] = useState(false);
+
   const { values, handleChange, isValid, resetForm } = useForm();
   const { searchInput } = values;
   const { filterMovies } = useFilter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchInput);
-    const filteredMovies = filterMovies(searchInput);
-    console.log(filteredMovies);
-    setMovies(filteredMovies);
+    filterMovies(searchInput, setMovies, isShort);
     resetForm();
+  };
+
+  const handleChangeShort = (e) => {
+    setIsShort(e.target.checked);
   };
 
   return (
@@ -42,7 +45,7 @@ const SearchForm = ({ setMovies }) => {
           />
         </fieldset>
       </form>
-      <CustomCheckbox />
+      <CustomCheckbox isShort={isShort} handleChangeShort={handleChangeShort} />
     </>
   );
 };

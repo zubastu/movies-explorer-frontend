@@ -4,9 +4,7 @@ export default class Client {
   }
   _checkPromise(promise) {
     return promise.then((res) => {
-      return res.ok
-        ? res.json()
-        : Promise.reject(`Ошибка: ${res.status}, ${res.message}`);
+      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
     });
   }
 
@@ -68,6 +66,7 @@ export default class Client {
     });
     return this._checkPromise(promise);
   }
+
   postAuth(type, data) {
     const promise = fetch(`${this._url}${type}`, {
       method: "POST",

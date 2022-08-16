@@ -1,6 +1,6 @@
 import React from "react";
 import "./TooltipModalWindow.css";
-import Popup from "../../Popup/Popup";
+import Popup from "../Popup/Popup";
 import success from "../../images/sucsess.svg";
 import failure from "../../images/wrong.svg";
 

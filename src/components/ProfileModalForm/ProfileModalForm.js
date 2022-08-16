@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProfileModalForm.css";
-import Popup from "../../Popup/Popup";
+import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
 
 const ProfileModalForm = ({ closePopup, isActive }) => {

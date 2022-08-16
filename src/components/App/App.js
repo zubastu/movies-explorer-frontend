@@ -15,7 +15,6 @@ import { mainApi } from "../../utils/MainApi";
 function App() {
   const [state, setState] = useState({
     menuActive: false,
-    preloaderActive: false,
     tooltipActive: false,
     tooltipSuccess: false,
     tooltipContent: "",
@@ -23,10 +22,10 @@ function App() {
     isLoggedIn: true,
     moviesList: [],
   });
+  const [preloaderActive, setPreloaderActive] = useState(false);
 
   const {
     menuActive,
-    preloaderActive,
     tooltipActive,
     tooltipSuccess,
     tooltipContent,
@@ -35,13 +34,28 @@ function App() {
     moviesList,
   } = state;
 
-  const showErrorPopup = (e) =>
+  const startRequestPreloader = () => setPreloaderActive(true);
+  const stopRequestPreloader = () => setPreloaderActive(false);
+
+  const showErrorPopup = (message) => {
     setState({
       ...state,
+      preloaderActive: false,
       tooltipSuccess: false,
       tooltipActive: true,
-      tooltipContent: `${e.status} ${e.message}`,
+      tooltipContent: `${message}`,
     });
+  };
+
+  const showSuccessPopup = (message) => {
+    setState({
+      ...state,
+      preloaderActive: false,
+      tooltipSuccess: true,
+      tooltipActive: true,
+      tooltipContent: `${message}`,
+    });
+  };
 
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
   const closeBurgerMenu = () => setState({ ...state, menuActive: false });
@@ -57,10 +71,16 @@ function App() {
   const setMovies = (movies) => setState({ ...state, moviesList: movies });
 
   const onRegister = (name, email, password) => {
+    startRequestPreloader();
     mainApi
       .register(name, email, password)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) =>
+        showErrorPopup("Введите другие данные, либо они уже используются")
+      )
+      .finally(() => stopRequestPreloader());
   };
 
   return (

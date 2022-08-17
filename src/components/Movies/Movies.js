@@ -13,7 +13,8 @@ const Movies = ({
   setMovies,
   getMovies,
 }) => {
-  const { showMoreMovies, renderMovies } = useWindowParams(moviesList);
+  const { showMoreMovies, renderMovies } = useWindowParams();
+  const movies = renderMovies(moviesList);
 
   return (
     <section className="movies">
@@ -23,7 +24,7 @@ const Movies = ({
           <SearchForm setMovies={setMovies} getMovies={getMovies} />
         </div>
 
-        <MoviesCardList moviesList={renderMovies} />
+        <MoviesCardList moviesList={movies} />
         <div className="more-button-container">
           <button
             className="load-more-btn"

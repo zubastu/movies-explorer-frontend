@@ -17,7 +17,7 @@ export default class MainApi {
     const userPatchInfo = { email, name };
     return this._client.patch("/users/me", userPatchInfo);
   }
-  getUserInfo() {
+  authorization() {
     return this._client.get("/users/me");
   }
   // Блок для работы с фильмами

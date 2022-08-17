@@ -13,7 +13,7 @@ const Movies = ({
   setMovies,
   getMovies,
 }) => {
-  const { showMoreMovies, renderMovies } = useWindowParams();
+  const { showMoreMovies, renderMovies, countMovies } = useWindowParams();
   const movies = renderMovies(moviesList);
 
   return (
@@ -26,13 +26,15 @@ const Movies = ({
 
         <MoviesCardList moviesList={movies} />
         <div className="more-button-container">
-          <button
-            className="load-more-btn"
-            type="button"
-            onClick={() => showMoreMovies()}
-          >
-            Ещё
-          </button>
+          {movies && moviesList.length > countMovies && (
+            <button
+              className="load-more-btn"
+              type="button"
+              onClick={() => showMoreMovies()}
+            >
+              Ещё
+            </button>
+          )}
         </div>
       </main>
       <Footer />

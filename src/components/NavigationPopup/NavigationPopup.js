@@ -25,6 +25,7 @@ const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
         />
         <nav className="navigation-popup__navigation-container">
           <NavLink
+            onClick={() => closeBurgerMenu()}
             to="/"
             className={
               location.pathname === "/"
@@ -35,6 +36,7 @@ const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
             Главная
           </NavLink>
           <NavLink
+            onClick={() => closeBurgerMenu()}
             to="/movies"
             className={
               location.pathname === "/movies"
@@ -45,6 +47,7 @@ const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
             Фильмы
           </NavLink>
           <NavLink
+            onClick={() => closeBurgerMenu()}
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
@@ -56,6 +59,7 @@ const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
           </NavLink>
         </nav>
         <NavLink
+          onClick={() => closeBurgerMenu()}
           to="/profile"
           className="navigation-popup__link navigation-popup__link_type_account hover-button"
         >

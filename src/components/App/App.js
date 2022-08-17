@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -13,6 +14,7 @@ import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 import { mainApi } from "../../utils/MainApi";
 import login from "../Login/Login";
 import { moviesApi } from "../../utils/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [state, setState] = useState({
@@ -24,6 +26,7 @@ function App() {
     isLoggedIn: false,
     moviesList: [],
     savedMovies: [],
+    currentUser: {},
   });
   const [preloaderActive, setPreloaderActive] = useState(false);
 
@@ -36,6 +39,7 @@ function App() {
     isLoggedIn,
     moviesList,
     savedMovies,
+    currentUser,
   } = state;
 
   const navigate = useNavigate();
@@ -63,9 +67,9 @@ function App() {
     });
   };
 
-  const successLogin = (token) => {
-    setState({ ...state, isLoggedIn: true });
-    localStorage.setItem("jwt", token);
+  const successLogin = ({ token, name, email, _id }) => {
+    setState({ ...state, isLoggedIn: true, currentUser: { name, email, _id } });
+    token && localStorage.setItem("jwt", token);
     navigate("/movies", { replace: true });
   };
 
@@ -86,15 +90,10 @@ function App() {
   const closeProfileModal = () =>
     setState({ ...state, profileModalActive: false });
 
-  const setMovies = (movies) => setState({ ...state, moviesList: movies });
-
-  const setSavedMovies = (movies) =>
-    setState({ ...state, savedMovies: movies });
-
   const onLogin = (email, password) => {
     mainApi
       .login(email, password)
-      .then((res) => successLogin(res.token))
+      .then((res) => successLogin(res))
       .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
       .finally();
   };
@@ -108,7 +107,7 @@ function App() {
           mainApi
             .login(email, password)
             .then((res) => {
-              res.token && successLogin(res.token);
+              res.token && successLogin(res);
             })
             .catch((e) => console.log(e));
       })
@@ -130,35 +129,20 @@ function App() {
       });
     }
   };
+  const setMovies = (movies) => {
+    console.log(movies);
+    setState({ ...state, moviesList: movies });
+  };
 
   const getSavedMovies = () => {
-    const movies = localStorage.getItem("saved-movies");
-    if (movies) {
-      return JSON.parse(movies);
-    } else {
-      mainApi.getSavedMovies().then((moviesList) => {
-        const savedMovies = JSON.stringify(moviesList);
-        localStorage.setItem("saved-movies", savedMovies);
-        return moviesList;
-      });
-    }
+    mainApi.getSavedMovies().then((moviesList) => {
+      const savedMovies = JSON.stringify(moviesList);
+      localStorage.setItem("saved-movies", savedMovies);
+      return moviesList;
+    });
   };
-
-  const handleSaveMovie = (movie) => {
-    mainApi
-      .createMovie(movie)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
-      .finally();
-  };
-
-  const handleDeleteMovie = (id) => {
-    mainApi
-      .deleteMovie(id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
-      .finally();
-  };
+  const setSavedMovies = (movies) =>
+    setState({ ...state, savedMovies: movies });
 
   const onChangeUserInfo = (email, name) => {
     console.log(email, name);
@@ -168,6 +152,17 @@ function App() {
       .catch((e) => console.log(e))
       .finally();
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    token &&
+      mainApi
+        .authorization()
+        .then((res) => {
+          successLogin(res);
+        })
+        .catch((e) => console.log(e));
+  }, []);
 
   return (
     <>
@@ -182,55 +177,63 @@ function App() {
         menuActive={menuActive}
         closeBurgerMenu={closeBurgerMenu}
       />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Main openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
-          }
-        />
-        <Route
-          path="/movies"
-          element={
-            <Movies
-              openBurgerMenu={openBurgerMenu}
-              isLoggedIn={isLoggedIn}
-              setMovies={setMovies}
-              moviesList={moviesList}
-              getMovies={getMovies}
-            />
-          }
-        />
-        <Route
-          path="/saved-movies"
-          element={
-            <SavedMovies
-              openBurgerMenu={openBurgerMenu}
-              isLoggedIn={isLoggedIn}
-              savedMovies={savedMovies}
-              setSavedMovies={setSavedMovies}
-              getSavedMovies={getSavedMovies}
-            />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              openBurgerMenu={openBurgerMenu}
-              closeProfileModal={closeProfileModal}
-              profileModalActive={profileModalActive}
-              openProfileModal={openProfileModal}
-              isLoggedIn={isLoggedIn}
-              onChangeUserInfo={onChangeUserInfo}
-              onExit={onHandleExit}
-            />
-          }
-        />
-        <Route path="/signin" element={<Login onLogin={onLogin} />} />
-        <Route path="/signup" element={<Register onRegister={onRegister} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
+            }
+          />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute
+                component={Movies}
+                openBurgerMenu={openBurgerMenu}
+                isLoggedIn={isLoggedIn}
+                setMovies={setMovies}
+                moviesList={moviesList}
+                getMovies={getMovies}
+              />
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRoute
+                component={SavedMovies}
+                openBurgerMenu={openBurgerMenu}
+                isLoggedIn={isLoggedIn}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
+                getSavedMovies={getSavedMovies}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                component={Profile}
+                openBurgerMenu={openBurgerMenu}
+                closeProfileModal={closeProfileModal}
+                profileModalActive={profileModalActive}
+                openProfileModal={openProfileModal}
+                isLoggedIn={isLoggedIn}
+                onChangeUserInfo={onChangeUserInfo}
+                onExit={onHandleExit}
+              />
+            }
+          />
+          <Route path="/signin" element={<Login onLogin={onLogin} />} />
+          <Route
+            path="/signup"
+            element={<Register onRegister={onRegister} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </CurrentUserContext.Provider>
     </>
   );
 }

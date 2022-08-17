@@ -5,7 +5,7 @@ import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { useForm } from "../useForm";
 import { useFilter } from "../useFilter";
 
-const SearchForm = ({ setMovies }) => {
+const SearchForm = ({ setMovies, getMovies }) => {
   const [isShort, setIsShort] = useState(false);
 
   const { values, handleChange, isValid, resetForm } = useForm();
@@ -14,7 +14,7 @@ const SearchForm = ({ setMovies }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    filterMovies(searchInput, setMovies, isShort);
+    filterMovies(searchInput, setMovies, isShort, getMovies());
     resetForm();
   };
 

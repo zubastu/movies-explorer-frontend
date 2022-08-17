@@ -9,6 +9,8 @@ const Profile = ({
   closeProfileModal,
   openProfileModal,
   isLoggedIn,
+  onChangeUserInfo,
+  onExit,
 }) => {
   const user = {
     name: "Виталий",
@@ -19,6 +21,7 @@ const Profile = ({
       <ProfileModalForm
         closePopup={closeProfileModal}
         isActive={profileModalActive}
+        onChangeUserInfo={onChangeUserInfo}
       />
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
@@ -41,7 +44,10 @@ const Profile = ({
             >
               Редактировать
             </button>
-            <button className="profile__btn-out hover-button">
+            <button
+              className="profile__btn-out hover-button"
+              onClick={() => onExit()}
+            >
               Выйти из аккаунта
             </button>
           </div>

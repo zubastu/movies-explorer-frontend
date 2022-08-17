@@ -9,24 +9,26 @@ export default class MainApi {
     const authData = { name, email, password };
     return this._client.postAuth("/signup", authData);
   }
-  login() {
-    return this._client.post();
+  login(email, password) {
+    const authData = { email, password };
+    return this._client.postAuth("/signin", authData);
   }
-  patchUserInfo() {
-    return this._client.patch();
+  patchUserInfo(email, name) {
+    const userPatchInfo = { email, name };
+    return this._client.patch("/users/me", userPatchInfo);
   }
   getUserInfo() {
-    return this._client.get();
+    return this._client.get("/users/me");
   }
   // Блок для работы с фильмами
   getSavedMovies() {
-    return this._client.get();
+    return this._client.get("/movies");
   }
-  createMovie() {
-    return this._client.post();
+  createMovie(movieInfo) {
+    return this._client.post("/movies", movieInfo);
   }
-  deleteMovie() {
-    return this._client.delete();
+  deleteMovie(id) {
+    return this._client.delete(`/movies/${id}`);
   }
 }
 

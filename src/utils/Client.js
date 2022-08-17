@@ -43,7 +43,7 @@ export default class Client {
     return this._checkPromise(promise);
   }
 
-  patch(type) {
+  patch(type, data) {
     const promise = fetch(`${this._url}${type}`, {
       method: "PATCH",
       headers: {
@@ -51,6 +51,7 @@ export default class Client {
         Accept: "application/json: charset=utf-8",
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
+      body: JSON.stringify(data),
     });
     return this._checkPromise(promise);
   }
@@ -68,6 +69,7 @@ export default class Client {
   }
 
   postAuth(type, data) {
+    console.log(data);
     const promise = fetch(`${this._url}${type}`, {
       method: "POST",
       headers: {

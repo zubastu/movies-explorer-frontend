@@ -3,13 +3,13 @@ import "./ProfileModalForm.css";
 import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
 
-const ProfileModalForm = ({ closePopup, isActive }) => {
+const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
   const { values, resetForm, errors, handleChange, isValid } = useForm();
   const { email, name } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, name);
+    onChangeUserInfo(email, name);
     resetForm();
   };
 

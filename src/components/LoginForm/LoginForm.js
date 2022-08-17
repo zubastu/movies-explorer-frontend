@@ -2,13 +2,13 @@ import React from "react";
 import "./LoginForm.css";
 import { useForm } from "../useForm";
 
-const LoginForm = () => {
+const LoginForm = ({ onLogin }) => {
   const { values, resetForm, errors, handleChange, isValid } = useForm();
   const { email, password } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    onLogin(email, password);
     resetForm();
   };
 

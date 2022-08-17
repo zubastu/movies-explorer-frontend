@@ -3,7 +3,7 @@
   width: 380px;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 60px 40px 40px 40px;
   background: #FFFFFF;
   box-sizing: border-box;
   border-radius: 15px;

@@ -11,7 +11,6 @@ const MoviesCard = ({ movie }) => {
     return `${h} ч ${m}м`;
   };
 
-  console.log(movie);
   return (
     <div className="movie-card">
       <div className="movie-card__description">

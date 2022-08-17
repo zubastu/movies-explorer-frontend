@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -11,6 +11,8 @@ import Preloader from "../Preloader/Preloader";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 import { mainApi } from "../../utils/MainApi";
+import login from "../Login/Login";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [state, setState] = useState({
@@ -18,9 +20,10 @@ function App() {
     tooltipActive: false,
     tooltipSuccess: false,
     tooltipContent: "",
-    profileModalActive: true,
-    isLoggedIn: true,
+    profileModalActive: false,
+    isLoggedIn: false,
     moviesList: [],
+    savedMovies: [],
   });
   const [preloaderActive, setPreloaderActive] = useState(false);
 
@@ -32,7 +35,10 @@ function App() {
     profileModalActive,
     isLoggedIn,
     moviesList,
+    savedMovies,
   } = state;
+
+  const navigate = useNavigate();
 
   const startRequestPreloader = () => setPreloaderActive(true);
   const stopRequestPreloader = () => setPreloaderActive(false);
@@ -57,6 +63,18 @@ function App() {
     });
   };
 
+  const successLogin = (token) => {
+    setState({ ...state, isLoggedIn: true });
+    localStorage.setItem("jwt", token);
+    navigate("/movies", { replace: true });
+  };
+
+  const onHandleExit = () => {
+    setState({ ...state, isLoggedIn: false });
+    localStorage.removeItem("jwt");
+    navigate("/signin", { replace: true });
+  };
+
   const openBurgerMenu = () => setState({ ...state, menuActive: true });
   const closeBurgerMenu = () => setState({ ...state, menuActive: false });
 
@@ -70,17 +88,85 @@ function App() {
 
   const setMovies = (movies) => setState({ ...state, moviesList: movies });
 
+  const setSavedMovies = (movies) =>
+    setState({ ...state, savedMovies: movies });
+
+  const onLogin = (email, password) => {
+    mainApi
+      .login(email, password)
+      .then((res) => successLogin(res.token))
+      .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
+      .finally();
+  };
+
   const onRegister = (name, email, password) => {
     startRequestPreloader();
     mainApi
       .register(name, email, password)
       .then((res) => {
-        console.log(res);
+        res &&
+          mainApi
+            .login(email, password)
+            .then((res) => {
+              res.token && successLogin(res.token);
+            })
+            .catch((e) => console.log(e));
       })
       .catch((e) =>
-        showErrorPopup("Введите другие данные, либо они уже используются")
+        showErrorPopup(`${e} Введите другие данные, либо они уже используются`)
       )
       .finally(() => stopRequestPreloader());
+  };
+
+  const getMovies = () => {
+    const movies = localStorage.getItem("movies");
+    if (movies) {
+      return JSON.parse(movies);
+    } else {
+      moviesApi.getMovies().then((moviesList) => {
+        const savedMovies = JSON.stringify(moviesList);
+        localStorage.setItem("movies", savedMovies);
+        return moviesList;
+      });
+    }
+  };
+
+  const getSavedMovies = () => {
+    const movies = localStorage.getItem("saved-movies");
+    if (movies) {
+      return JSON.parse(movies);
+    } else {
+      mainApi.getSavedMovies().then((moviesList) => {
+        const savedMovies = JSON.stringify(moviesList);
+        localStorage.setItem("saved-movies", savedMovies);
+        return moviesList;
+      });
+    }
+  };
+
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .createMovie(movie)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
+  };
+
+  const handleDeleteMovie = (id) => {
+    mainApi
+      .deleteMovie(id)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
+  };
+
+  const onChangeUserInfo = (email, name) => {
+    console.log(email, name);
+    mainApi
+      .patchUserInfo(email, name)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
   };
 
   return (
@@ -111,6 +197,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               setMovies={setMovies}
               moviesList={moviesList}
+              getMovies={getMovies}
             />
           }
         />
@@ -120,6 +207,9 @@ function App() {
             <SavedMovies
               openBurgerMenu={openBurgerMenu}
               isLoggedIn={isLoggedIn}
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
+              getSavedMovies={getSavedMovies}
             />
           }
         />
@@ -132,10 +222,12 @@ function App() {
               profileModalActive={profileModalActive}
               openProfileModal={openProfileModal}
               isLoggedIn={isLoggedIn}
+              onChangeUserInfo={onChangeUserInfo}
+              onExit={onHandleExit}
             />
           }
         />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signin" element={<Login onLogin={onLogin} />} />
         <Route path="/signup" element={<Register onRegister={onRegister} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

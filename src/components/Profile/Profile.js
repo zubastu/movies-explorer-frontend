@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import ProfileModalForm from "../ProfileModalForm/ProfileModalForm";
@@ -14,6 +14,7 @@ const Profile = ({
   onExit,
 }) => {
   const { name, email } = useContext(CurrentUserContext);
+
   return (
     <>
       <ProfileModalForm

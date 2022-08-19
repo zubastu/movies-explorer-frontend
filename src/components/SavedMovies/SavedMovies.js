@@ -12,6 +12,7 @@ const SavedMovies = ({
   setSavedMovies,
   getSavedMovies,
 }) => {
+  console.log(savedMovies);
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />

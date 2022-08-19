@@ -26,9 +26,9 @@ function App() {
     isLoggedIn: false,
     moviesList: [],
     savedMovies: [],
-    currentUser: {},
   });
   const [preloaderActive, setPreloaderActive] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   const {
     menuActive,
@@ -39,12 +39,12 @@ function App() {
     isLoggedIn,
     moviesList,
     savedMovies,
-    currentUser,
   } = state;
 
   const navigate = useNavigate();
 
   const startRequestPreloader = () => setPreloaderActive(true);
+
   const stopRequestPreloader = () => setPreloaderActive(false);
 
   const showErrorPopup = (message) => {
@@ -67,10 +67,22 @@ function App() {
     });
   };
 
+  const openProfileModal = () =>
+    setState({ ...state, profileModalActive: true });
+
+  const closeProfileModal = () =>
+    setState({ ...state, profileModalActive: false });
+
+  const openBurgerMenu = () => setState({ ...state, menuActive: true });
+
+  const closeBurgerMenu = () => setState({ ...state, menuActive: false });
+
+  const closeTooltip = () => setState({ ...state, tooltipActive: false });
+
   const successLogin = ({ token, name, email, _id }) => {
-    setState({ ...state, isLoggedIn: true, currentUser: { name, email, _id } });
+    setState({ ...state, isLoggedIn: true });
+    setCurrentUser({ name, email, _id });
     token && localStorage.setItem("jwt", token);
-    navigate("/movies", { replace: true });
   };
 
   const onHandleExit = () => {
@@ -79,21 +91,13 @@ function App() {
     navigate("/signin", { replace: true });
   };
 
-  const openBurgerMenu = () => setState({ ...state, menuActive: true });
-  const closeBurgerMenu = () => setState({ ...state, menuActive: false });
-
-  const closeTooltip = () => setState({ ...state, tooltipActive: false });
-
-  const openProfileModal = () =>
-    setState({ ...state, profileModalActive: true });
-
-  const closeProfileModal = () =>
-    setState({ ...state, profileModalActive: false });
-
   const onLogin = (email, password) => {
     mainApi
       .login(email, password)
-      .then((res) => successLogin(res))
+      .then((res) => {
+        successLogin(res);
+        navigate("/movies", { replace: true });
+      })
       .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
       .finally();
   };
@@ -108,6 +112,7 @@ function App() {
             .login(email, password)
             .then((res) => {
               res.token && successLogin(res);
+              navigate("/movies", { replace: true });
             })
             .catch((e) => console.log(e));
       })
@@ -130,7 +135,6 @@ function App() {
     }
   };
   const setMovies = (movies) => {
-    console.log(movies);
     setState({ ...state, moviesList: movies });
   };
 
@@ -145,10 +149,12 @@ function App() {
     setState({ ...state, savedMovies: movies });
 
   const onChangeUserInfo = (email, name) => {
-    console.log(email, name);
     mainApi
       .patchUserInfo(email, name)
-      .then((res) => console.log(res))
+      .then(({ name, email, _id }) => {
+        setCurrentUser({ name, email, _id });
+        closeProfileModal();
+      })
       .catch((e) => console.log(e))
       .finally();
   };
@@ -160,24 +166,68 @@ function App() {
         .authorization()
         .then((res) => {
           successLogin(res);
+          navigate("/", { replace: true });
         })
         .catch((e) => console.log(e));
   }, []);
 
+  const checkIsSavedMovie = (id) =>
+    savedMovies.some((movie) => movie.movieId === id);
+
+  const onMovieSave = (movie) => {
+    const newMovie = {
+      country: movie.country || "Неизвестно",
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      trailerLink: movie.trailerLink,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      image: `https://api.nomoreparties.co${movie.image.url}`,
+      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+    };
+
+    mainApi
+      .createMovie(newMovie)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
+  };
+
+  const onMovieDelete = (id) => {
+    mainApi
+      .deleteMovie(id)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
+  };
+
+  const changeMovieStatus = (movie, isSaved, setIsSaved) => {
+    setIsSaved(checkIsSavedMovie(movie.id || movie.movieId));
+
+    if (isSaved) {
+      onMovieDelete(movie.movieId);
+    } else {
+    }
+  };
+
   return (
     <>
-      <TooltipModalWindow
-        isSuccess={tooltipSuccess}
-        isActive={tooltipActive}
-        closePopup={closeTooltip}
-        tooltipContent={tooltipContent}
-      />
-      <Preloader preloaderActive={preloaderActive} />
-      <NavigationPopup
-        menuActive={menuActive}
-        closeBurgerMenu={closeBurgerMenu}
-      />
       <CurrentUserContext.Provider value={currentUser}>
+        <TooltipModalWindow
+          isSuccess={tooltipSuccess}
+          isActive={tooltipActive}
+          closePopup={closeTooltip}
+          tooltipContent={tooltipContent}
+        />
+        <Preloader preloaderActive={preloaderActive} />
+        <NavigationPopup
+          menuActive={menuActive}
+          closeBurgerMenu={closeBurgerMenu}
+        />
+
         <Routes>
           <Route
             path="/"
@@ -211,6 +261,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/profile"
             element={
@@ -226,6 +277,7 @@ function App() {
               />
             }
           />
+
           <Route path="/signin" element={<Login onLogin={onLogin} />} />
           <Route
             path="/signup"

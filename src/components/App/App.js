@@ -12,7 +12,6 @@ import Preloader from "../Preloader/Preloader";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 import { mainApi } from "../../utils/MainApi";
-import login from "../Login/Login";
 import { moviesApi } from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 

@@ -12,6 +12,8 @@ const Movies = ({
   moviesList,
   setMovies,
   getMovies,
+  onMovieSave,
+  checkIsSavedMovie,
 }) => {
   const { showMoreMovies, renderMovies, countMovies } = useWindowParams();
   const movies = renderMovies(moviesList);
@@ -24,7 +26,11 @@ const Movies = ({
           <SearchForm setMovies={setMovies} getMovies={getMovies} />
         </div>
 
-        <MoviesCardList moviesList={movies} />
+        <MoviesCardList
+          moviesList={movies}
+          changeMovieStatus={onMovieSave}
+          checkIsSavedMovie={checkIsSavedMovie}
+        />
         <div className="more-button-container">
           {movies && moviesList.length > countMovies && (
             <button

@@ -24,11 +24,11 @@ function App() {
     tooltipContent: "",
     profileModalActive: false,
     isLoggedIn: false,
-    moviesList: [],
-    savedMovies: [],
   });
   const [preloaderActive, setPreloaderActive] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const {
     menuActive,
@@ -37,8 +37,6 @@ function App() {
     tooltipContent,
     profileModalActive,
     isLoggedIn,
-    moviesList,
-    savedMovies,
   } = state;
 
   const navigate = useNavigate();
@@ -127,26 +125,28 @@ function App() {
     if (movies) {
       return JSON.parse(movies);
     } else {
-      moviesApi.getMovies().then((moviesList) => {
+      return moviesApi.getMovies().then((moviesList) => {
         const savedMovies = JSON.stringify(moviesList);
         localStorage.setItem("movies", savedMovies);
         return moviesList;
       });
     }
   };
-  const setMovies = (movies) => {
-    setState({ ...state, moviesList: movies });
+  const setMoviesList = (movies) => {
+    setMovies(movies);
   };
 
   const getSavedMovies = () => {
-    mainApi.getSavedMovies().then((moviesList) => {
+    return mainApi.getSavedMovies().then((moviesList) => {
       const savedMovies = JSON.stringify(moviesList);
       localStorage.setItem("saved-movies", savedMovies);
+      setSavedMovies(moviesList);
       return moviesList;
     });
   };
-  const setSavedMovies = (movies) =>
-    setState({ ...state, savedMovies: movies });
+  const setSavedMoviesList = (movies) => {
+    setSavedMovies(movies);
+  };
 
   const onChangeUserInfo = (email, name) => {
     mainApi
@@ -166,35 +166,14 @@ function App() {
         .authorization()
         .then((res) => {
           successLogin(res);
+          getSavedMovies();
           navigate("/", { replace: true });
         })
         .catch((e) => console.log(e));
   }, []);
 
-  const checkIsSavedMovie = (id) =>
-    savedMovies.some((movie) => movie.movieId === id);
-
-  const onMovieSave = (movie) => {
-    const newMovie = {
-      country: movie.country || "Неизвестно",
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      trailerLink: movie.trailerLink,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-      image: `https://api.nomoreparties.co${movie.image.url}`,
-      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-      movieId: movie.id,
-    };
-
-    mainApi
-      .createMovie(newMovie)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
-      .finally();
-  };
+  const checkIsSavedMovie = (movie) =>
+    savedMovies.some((savedMovie) => movie.id === savedMovie.movieId);
 
   const onMovieDelete = (id) => {
     mainApi
@@ -204,13 +183,33 @@ function App() {
       .finally();
   };
 
-  const changeMovieStatus = (movie, isSaved, setIsSaved) => {
-    setIsSaved(checkIsSavedMovie(movie.id || movie.movieId));
-
-    if (isSaved) {
-      onMovieDelete(movie.movieId);
-    } else {
+  const onMovieSave = (movie, setIsSaved) => {
+    setIsSaved(checkIsSavedMovie(movie));
+    if (checkIsSavedMovie(movie)) {
+      showErrorPopup("Фильм уже добавлен в избранное");
     }
+
+    const newMovie = {
+      country: movie.country || "Неизвестно",
+      director: movie.director || "Неизвестно",
+      duration: movie.duration || "Неизвестно",
+      year: movie.year || "Неизвестно",
+      description: movie.description || "Неизвестно",
+      trailerLink: movie.trailerLink || "Неизвестно",
+      nameRU: movie.nameRU || "Неизвестно",
+      nameEN: movie.nameEN || "Неизвестно",
+      image: `https://api.nomoreparties.co${movie.image.url}` || "Неизвестно",
+      thumbnail:
+        `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` ||
+        "Неизвестно",
+      movieId: movie.id,
+    };
+
+    mainApi
+      .createMovie(newMovie)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+      .finally();
   };
 
   return (
@@ -242,9 +241,11 @@ function App() {
                 component={Movies}
                 openBurgerMenu={openBurgerMenu}
                 isLoggedIn={isLoggedIn}
-                setMovies={setMovies}
-                moviesList={moviesList}
+                setMovies={setMoviesList}
+                moviesList={movies}
                 getMovies={getMovies}
+                onMovieSave={onMovieSave}
+                checkIsSavedMovie={checkIsSavedMovie}
               />
             }
           />
@@ -256,8 +257,10 @@ function App() {
                 openBurgerMenu={openBurgerMenu}
                 isLoggedIn={isLoggedIn}
                 savedMovies={savedMovies}
-                setSavedMovies={setSavedMovies}
+                setSavedMovies={setSavedMoviesList}
                 getSavedMovies={getSavedMovies}
+                onMovieDelete={onMovieDelete}
+                checkIsSavedMovie={checkIsSavedMovie}
               />
             }
           />

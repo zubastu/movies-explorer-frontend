@@ -11,8 +11,9 @@ const SavedMovies = ({
   savedMovies,
   setSavedMovies,
   getSavedMovies,
+  onMovieDelete,
+  checkIsSavedMovie,
 }) => {
-  console.log(savedMovies);
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
@@ -20,7 +21,11 @@ const SavedMovies = ({
         <div className="search-container">
           <SearchForm setMovies={setSavedMovies} getMovies={getSavedMovies} />
         </div>
-        <MoviesCardList moviesList={savedMovies} />
+        <MoviesCardList
+          moviesList={savedMovies}
+          changeMovieStatus={onMovieDelete}
+          checkIsSavedMovie={checkIsSavedMovie}
+        />
         <div className="more-button-container"></div>
       </main>
       <Footer />

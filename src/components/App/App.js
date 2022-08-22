@@ -91,6 +91,8 @@ function App() {
       .login(email, password)
       .then((res) => {
         successLogin(res);
+        getSavedMovies();
+        getMovies();
         navigate("/movies", { replace: true });
       })
       .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
@@ -107,6 +109,8 @@ function App() {
             .login(email, password)
             .then((res) => {
               res.token && successLogin(res);
+              getSavedMovies();
+              getMovies();
               navigate("/movies", { replace: true });
             })
             .catch((e) => console.log(e));

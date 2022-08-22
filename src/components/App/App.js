@@ -121,14 +121,14 @@ function App() {
 
   const getMovies = () => {
     const movies = localStorage.getItem("movies");
-    if (movies) {
-      return JSON.parse(movies);
-    } else {
+    if (!movies) {
       return moviesApi.getMovies().then((moviesList) => {
         const savedMovies = JSON.stringify(moviesList);
         localStorage.setItem("movies", savedMovies);
         return moviesList;
       });
+    } else {
+      return JSON.parse(movies);
     }
   };
   const setMoviesList = (movies) => {
@@ -136,12 +136,16 @@ function App() {
   };
 
   const getSavedMovies = () => {
-    return mainApi.getSavedMovies().then((moviesList) => {
-      const savedMovies = JSON.stringify(moviesList);
-      localStorage.setItem("saved-movies", savedMovies);
-      setSavedMovies(moviesList);
-      return moviesList;
-    });
+    const movies = localStorage.getItem("saved-movies");
+    if (!movies) {
+      return mainApi.getSavedMovies().then((moviesList) => {
+        const savedMovies = JSON.stringify(moviesList);
+        localStorage.setItem("saved-movies", savedMovies);
+        setSavedMovies(moviesList);
+        return moviesList;
+      });
+    }
+    return movies;
   };
   const setSavedMoviesList = (movies) => {
     setSavedMovies(movies);

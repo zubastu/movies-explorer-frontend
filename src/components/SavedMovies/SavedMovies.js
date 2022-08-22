@@ -13,13 +13,18 @@ const SavedMovies = ({
   getSavedMovies,
   onMovieDelete,
   checkIsSavedMovie,
+  stopRequestPreloader,
 }) => {
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
-          <SearchForm setMovies={setSavedMovies} getMovies={getSavedMovies} />
+          <SearchForm
+            setMovies={setSavedMovies}
+            getMovies={getSavedMovies}
+            stopLoader={stopRequestPreloader}
+          />
         </div>
         <MoviesCardList
           moviesList={savedMovies}

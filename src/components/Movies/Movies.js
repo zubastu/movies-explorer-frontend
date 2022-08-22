@@ -11,9 +11,10 @@ const Movies = ({
   isLoggedIn,
   moviesList,
   setMovies,
-  getMovies,
   onMovieSave,
   checkIsSavedMovie,
+  getMovies,
+  stopRequestPreloader,
 }) => {
   const { showMoreMovies, renderMovies, countMovies } = useWindowParams();
   const movies = renderMovies(moviesList);
@@ -23,7 +24,11 @@ const Movies = ({
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
-          <SearchForm setMovies={setMovies} getMovies={getMovies} />
+          <SearchForm
+            setMovies={setMovies}
+            getMovies={getMovies}
+            stopLoader={stopRequestPreloader}
+          />
         </div>
 
         <MoviesCardList

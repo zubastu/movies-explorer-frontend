@@ -93,8 +93,7 @@ function App() {
       .login(email, password)
       .then((res) => {
         successLogin(res);
-        getSavedMovies();
-        getMovies();
+        getSavedMovies().then((savedMovies) => setSavedMoviesList(savedMovies));
         navigate("/movies", { replace: true });
       })
       .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
@@ -111,8 +110,9 @@ function App() {
             .login(email, password)
             .then((res) => {
               res.token && successLogin(res);
-              getSavedMovies();
-              getMovies();
+              getSavedMovies().then((savedMovies) =>
+                setSavedMoviesList(savedMovies)
+              );
               navigate("/movies", { replace: true });
             })
             .catch((e) => console.log(e));
@@ -123,43 +123,36 @@ function App() {
       .finally(() => stopRequestPreloader());
   };
 
-  const getMovies = () => {
-    const movies = localStorage.getItem("movies");
-    if (!movies) {
-      return moviesApi
-        .getMovies()
-        .then((moviesList) => {
-          const savedMovies = JSON.stringify(moviesList);
-          localStorage.setItem("movies", savedMovies);
-          return moviesList;
-        })
-        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
+  async function getMovies() {
+    startRequestPreloader();
+    if (!localStorage.getItem("movies")) {
+      return moviesApi.getMovies().then((moviesList) => {
+        const movies = JSON.stringify(moviesList);
+        localStorage.setItem("movies", movies);
+        return moviesList;
+      });
     } else {
-      return JSON.parse(movies);
+      return JSON.parse(localStorage.getItem("movies"));
     }
-  };
+  }
 
   const setMoviesList = (movies) => {
     setMovies(movies);
   };
 
-  const getSavedMovies = () => {
-    const movies = localStorage.getItem("saved-movies");
-    if (!movies) {
-      return mainApi
-        .getSavedMovies()
-        .then((moviesList) => {
-          const savedMovies = JSON.stringify(moviesList);
-          moviesList.length > 0 &&
-            localStorage.setItem("saved-movies", savedMovies);
-          setSavedMovies(moviesList);
-          return moviesList;
-        })
-        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
+  async function getSavedMovies() {
+    if (!localStorage.getItem("saved-movies")) {
+      return mainApi.getSavedMovies().then((moviesList) => {
+        const savedMovies = JSON.stringify(moviesList);
+        moviesList.length > 0 &&
+          localStorage.setItem("saved-movies", savedMovies);
+        setSavedMovies(moviesList);
+        return moviesList;
+      });
+    } else {
+      return JSON.parse(localStorage.getItem("saved-movies"));
     }
-    setSavedMovies(JSON.parse(movies));
-    return JSON.parse(movies);
-  };
+  }
 
   const setSavedMoviesList = (movies) => {
     if (movies.length <= 0) {
@@ -187,9 +180,10 @@ function App() {
         .authorization()
         .then((res) => {
           successLogin(res);
-          getSavedMovies();
-          getMovies();
-          navigate("/", { replace: true });
+          getSavedMovies().then((savedMovies) => {
+            setSavedMoviesList(savedMovies);
+            navigate("/", { replace: true });
+          });
         })
         .catch((e) => console.log(e));
   }, []);
@@ -279,6 +273,7 @@ function App() {
                 getMovies={getMovies}
                 onMovieSave={onMovieSave}
                 checkIsSavedMovie={checkIsSavedMovie}
+                stopRequestPreloader={stopRequestPreloader}
               />
             }
           />
@@ -294,6 +289,7 @@ function App() {
                 getSavedMovies={getSavedMovies}
                 onMovieDelete={onMovieDelete}
                 checkIsSavedMovie={checkIsSavedMovie}
+                stopRequestPreloader={stopRequestPreloader}
               />
             }
           />

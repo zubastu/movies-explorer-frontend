@@ -10,10 +10,18 @@ export const useWindowParams = () => {
 
   useEffect(() => {
     window.addEventListener("resize", setCurrentWidth);
-
+    /*
     windowWidth >= 1280 && setCountMovies(12);
     windowWidth <= 1280 && setCountMovies(8);
-    windowWidth <= 480 && setCountMovies(5);
+    windowWidth <= 480 && setCountMovies(5);*/
+
+    if (windowWidth >= 1280) {
+      setCountMovies(12);
+    } else if (windowWidth < 1280 && windowWidth >= 481) {
+      setCountMovies(8);
+    } else {
+      setCountMovies(5);
+    }
 
     return () => {
       window.removeEventListener("resize", setCurrentWidth);

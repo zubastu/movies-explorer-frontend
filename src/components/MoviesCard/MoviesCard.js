@@ -21,6 +21,7 @@ const MoviesCard = ({ movie, changeMovieStatus, checkIsSavedMovie }) => {
 
   const handleClickOnMovieButton = () => {
     changeMovieStatus(movie, setIsSaved);
+    !isSaved && setIsSaved(!isSaved);
   };
 
   return (

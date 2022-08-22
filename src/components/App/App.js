@@ -47,7 +47,6 @@ function App() {
   const showErrorPopup = (message) => {
     setState({
       ...state,
-      preloaderActive: false,
       tooltipSuccess: false,
       tooltipActive: true,
       tooltipContent: `${message}`,
@@ -57,7 +56,6 @@ function App() {
   const showSuccessPopup = (message) => {
     setState({
       ...state,
-      preloaderActive: false,
       tooltipSuccess: true,
       tooltipActive: true,
       tooltipContent: `${message}`,
@@ -122,15 +120,19 @@ function App() {
   const getMovies = () => {
     const movies = localStorage.getItem("movies");
     if (!movies) {
-      return moviesApi.getMovies().then((moviesList) => {
-        const savedMovies = JSON.stringify(moviesList);
-        localStorage.setItem("movies", savedMovies);
-        return moviesList;
-      });
+      return moviesApi
+        .getMovies()
+        .then((moviesList) => {
+          const savedMovies = JSON.stringify(moviesList);
+          localStorage.setItem("movies", savedMovies);
+          return moviesList;
+        })
+        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
     } else {
       return JSON.parse(movies);
     }
   };
+
   const setMoviesList = (movies) => {
     setMovies(movies);
   };
@@ -138,17 +140,26 @@ function App() {
   const getSavedMovies = () => {
     const movies = localStorage.getItem("saved-movies");
     if (!movies) {
-      return mainApi.getSavedMovies().then((moviesList) => {
-        const savedMovies = JSON.stringify(moviesList);
-        localStorage.setItem("saved-movies", savedMovies);
-        setSavedMovies(moviesList);
-        return moviesList;
-      });
+      return mainApi
+        .getSavedMovies()
+        .then((moviesList) => {
+          const savedMovies = JSON.stringify(moviesList);
+          moviesList.length > 0 &&
+            localStorage.setItem("saved-movies", savedMovies);
+          setSavedMovies(moviesList);
+          return moviesList;
+        })
+        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
     }
+    setSavedMovies(JSON.parse(movies));
     return JSON.parse(movies);
   };
 
   const setSavedMoviesList = (movies) => {
+    if (movies.length <= 0) {
+      localStorage.removeItem("saved-movies");
+    }
+    localStorage.setItem("saved-movies", JSON.stringify(movies));
     setSavedMovies(movies);
   };
 
@@ -171,6 +182,7 @@ function App() {
         .then((res) => {
           successLogin(res);
           getSavedMovies();
+          getMovies();
           navigate("/", { replace: true });
         })
         .catch((e) => console.log(e));
@@ -182,8 +194,14 @@ function App() {
   const onMovieDelete = (id) => {
     mainApi
       .deleteMovie(id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
+      .then(() => {
+        const newSavedMovies = savedMovies.filter((movie) => {
+          return movie._id !== id;
+        });
+        setSavedMoviesList(newSavedMovies);
+        showSuccessPopup("Успешно удалено из избранного!");
+      })
+      .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
       .finally();
   };
 
@@ -191,6 +209,7 @@ function App() {
     setIsSaved(checkIsSavedMovie(movie));
     if (checkIsSavedMovie(movie)) {
       showErrorPopup("Фильм уже добавлен в избранное");
+      return;
     }
 
     const newMovie = {
@@ -211,8 +230,12 @@ function App() {
 
     mainApi
       .createMovie(newMovie)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
+      .then((savedMovie) => {
+        const newSavedMovies = [savedMovie, ...savedMovies];
+        setSavedMoviesList(newSavedMovies);
+        showSuccessPopup("Успешно добавлено в избранное!");
+      })
+      .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
       .finally();
   };
 

@@ -3,7 +3,13 @@ import "./ProfileModalForm.css";
 import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
 
-const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
+const ProfileModalForm = ({
+  closePopup,
+  isActive,
+  onChangeUserInfo,
+  emailUser,
+  nameUser,
+}) => {
   const { values, resetForm, errors, handleChange, isValid } = useForm();
   const { email, name } = values;
 
@@ -27,7 +33,7 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
               }`}
               required={true}
               onInput={handleChange}
-              value={email || ""}
+              value={email || emailUser || ""}
             />
             <span className="form-profile__error-span form-profile__error-span_active">
               {errors.email}
@@ -46,7 +52,7 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
               }`}
               required={true}
               onInput={handleChange}
-              value={name || ""}
+              value={name || nameUser || ""}
             />
             <span className="form-profile__error-span form-profile__error-span_active">
               {errors.name}

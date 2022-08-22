@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import ProfileModalForm from "../ProfileModalForm/ProfileModalForm";
@@ -21,6 +21,8 @@ const Profile = ({
         closePopup={closeProfileModal}
         isActive={profileModalActive}
         onChangeUserInfo={onChangeUserInfo}
+        nameUser={name}
+        emailUser={email}
       />
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">

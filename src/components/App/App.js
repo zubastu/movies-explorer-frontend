@@ -145,8 +145,9 @@ function App() {
         return moviesList;
       });
     }
-    return movies;
+    return JSON.parse(movies);
   };
+
   const setSavedMoviesList = (movies) => {
     setSavedMovies(movies);
   };

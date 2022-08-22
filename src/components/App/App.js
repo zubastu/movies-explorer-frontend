@@ -83,6 +83,8 @@ function App() {
   const onHandleExit = () => {
     setState({ ...state, isLoggedIn: false });
     localStorage.removeItem("jwt");
+    localStorage.removeItem("saved-movies");
+    localStorage.removeItem("movies");
     navigate("/signin", { replace: true });
   };
 

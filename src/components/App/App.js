@@ -83,7 +83,6 @@ function App() {
   const onHandleExit = () => {
     setState({ ...state, isLoggedIn: false });
     localStorage.removeItem("jwt");
-    localStorage.removeItem("saved-movies");
     localStorage.removeItem("movies");
     navigate("/", { replace: true });
   };
@@ -137,24 +136,12 @@ function App() {
   };
 
   async function getSavedMovies() {
-    if (!localStorage.getItem("saved-movies")) {
-      return mainApi.getSavedMovies().then((moviesList) => {
-        const savedMovies = JSON.stringify(moviesList);
-        moviesList.length > 0 &&
-          localStorage.setItem("saved-movies", savedMovies);
-        setSavedMovies(moviesList);
-        return moviesList;
-      });
-    } else {
-      return JSON.parse(localStorage.getItem("saved-movies"));
-    }
+    return mainApi.getSavedMovies().then((moviesList) => {
+      return moviesList;
+    });
   }
 
   const setSavedMoviesList = (movies) => {
-    if (movies.length <= 0) {
-      localStorage.removeItem("saved-movies");
-    }
-    localStorage.setItem("saved-movies", JSON.stringify(movies));
     setSavedMovies(movies);
   };
 
@@ -200,8 +187,21 @@ function App() {
   const onMovieSave = (movie, setIsSaved) => {
     setIsSaved(checkIsSavedMovie(movie));
     if (checkIsSavedMovie(movie)) {
-      showErrorPopup("Фильм уже добавлен в избранное");
-      return;
+      const newSavedMovie = savedMovies.find(
+        (savedMovie) => savedMovie.movieId === movie.id
+      );
+      mainApi
+        .deleteMovie(newSavedMovie._id)
+        .then(() => {
+          const newSavedMovies = savedMovies.filter((movie) => {
+            return movie._id !== newSavedMovie._id;
+          });
+          setIsSaved(false);
+          setSavedMoviesList(newSavedMovies);
+          showSuccessPopup("Успешно удалено из избранного!");
+        })
+        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
+        .finally();
     }
 
     const newMovie = {
@@ -230,6 +230,17 @@ function App() {
       .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
       .finally();
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+    getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
+  }, [isLoggedIn]);
 
   return (
     <>

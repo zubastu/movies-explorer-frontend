@@ -15,9 +15,6 @@ const SavedMovies = ({
   checkIsSavedMovie,
   stopRequestPreloader,
 }) => {
-  useEffect(() => {
-    getSavedMovies().then((savedMovies) => setSavedMovies(savedMovies));
-  }, []);
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />

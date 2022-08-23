@@ -17,6 +17,7 @@ const Movies = ({
   stopRequestPreloader,
 }) => {
   const { showMoreMovies, renderMovies, countMovies } = useWindowParams();
+
   const movies = renderMovies(moviesList);
 
   return (

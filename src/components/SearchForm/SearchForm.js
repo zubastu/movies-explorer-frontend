@@ -8,7 +8,7 @@ import { useFilter } from "../useFilter";
 const SearchForm = ({ setMovies, getMovies, stopLoader }) => {
   const [isShort, setIsShort] = useState(false);
 
-  const { values, handleChange, isValid, resetForm } = useForm();
+  const { values, handleChange, isValid } = useForm();
   const { searchInput } = values;
   const { filterMovies } = useFilter();
 
@@ -16,8 +16,13 @@ const SearchForm = ({ setMovies, getMovies, stopLoader }) => {
     e.preventDefault();
     getMovies()
       .then((movies) => {
-        filterMovies(searchInput, setMovies, isShort, movies);
-        resetForm();
+        filterMovies(
+          searchInput,
+          setMovies,
+          isShort,
+          movies,
+          saveSearchResultStatus
+        );
         stopLoader();
       })
       .catch((e) => console.log(e));
@@ -25,6 +30,12 @@ const SearchForm = ({ setMovies, getMovies, stopLoader }) => {
 
   const handleChangeShort = (e) => {
     setIsShort(e.target.checked);
+  };
+
+  const saveSearchResultStatus = (checkbox, movies, inputValue) => {
+    localStorage.setItem("searchCheckbox", JSON.stringify(checkbox));
+    localStorage.setItem("lastFindMoviesLis", JSON.stringify(movies));
+    localStorage.setItem("searchInputValue", JSON.stringify(inputValue));
   };
 
   return (

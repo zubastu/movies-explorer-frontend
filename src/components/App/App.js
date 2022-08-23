@@ -185,7 +185,7 @@ function App() {
           });
         })
         .catch((e) => console.log(e));
-  }, []);
+  }, [isLoggedIn]);
 
   const checkIsSavedMovie = (movie) =>
     savedMovies.some((savedMovie) => movie.id === savedMovie.movieId);

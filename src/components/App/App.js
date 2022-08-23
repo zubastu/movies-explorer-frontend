@@ -202,33 +202,33 @@ function App() {
         })
         .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
         .finally();
+    } else {
+      const newMovie = {
+        country: movie.country || "Неизвестно",
+        director: movie.director || "Неизвестно",
+        duration: movie.duration || "Неизвестно",
+        year: movie.year || "Неизвестно",
+        description: movie.description || "Неизвестно",
+        trailerLink: movie.trailerLink || "Неизвестно",
+        nameRU: movie.nameRU || "Неизвестно",
+        nameEN: movie.nameEN || "Неизвестно",
+        image: `https://api.nomoreparties.co${movie.image.url}` || "Неизвестно",
+        thumbnail:
+          `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` ||
+          "Неизвестно",
+        movieId: movie.id,
+      };
+
+      mainApi
+        .createMovie(newMovie)
+        .then((savedMovie) => {
+          const newSavedMovies = [savedMovie, ...savedMovies];
+          setSavedMoviesList(newSavedMovies);
+          showSuccessPopup("Успешно добавлено в избранное!");
+        })
+        .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
+        .finally();
     }
-
-    const newMovie = {
-      country: movie.country || "Неизвестно",
-      director: movie.director || "Неизвестно",
-      duration: movie.duration || "Неизвестно",
-      year: movie.year || "Неизвестно",
-      description: movie.description || "Неизвестно",
-      trailerLink: movie.trailerLink || "Неизвестно",
-      nameRU: movie.nameRU || "Неизвестно",
-      nameEN: movie.nameEN || "Неизвестно",
-      image: `https://api.nomoreparties.co${movie.image.url}` || "Неизвестно",
-      thumbnail:
-        `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` ||
-        "Неизвестно",
-      movieId: movie.id,
-    };
-
-    mainApi
-      .createMovie(newMovie)
-      .then((savedMovie) => {
-        const newSavedMovies = [savedMovie, ...savedMovies];
-        setSavedMoviesList(newSavedMovies);
-        showSuccessPopup("Успешно добавлено в избранное!");
-      })
-      .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`))
-      .finally();
   };
 
   useEffect(() => {

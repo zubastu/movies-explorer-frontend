@@ -3,9 +3,16 @@ import "./ProfileModalForm.css";
 import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
 
-const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
-  const { values, resetForm, errors, handleChange, isValid } = useForm();
+const ProfileModalForm = ({
+  closePopup,
+  isActive,
+  onChangeUserInfo,
+  emailUser,
+  nameUser,
+}) => {
+  const { values, errors, handleChange, isValid } = useForm();
   const { email, name } = values;
+  const isChanged = Boolean(email === emailUser || name === nameUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,9 +31,9 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
               className={`form-profile__input form-profile__input_type_login ${
                 !isValid && errors.email && "form-profile__input_type_error"
               }`}
-              required={true}
-              onInput={handleChange}
-              value={email || ""}
+              required
+              onChange={handleChange}
+              value={email || emailUser || ""}
             />
             <span className="form-profile__error-span form-profile__error-span_active">
               {errors.email}
@@ -37,15 +44,12 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
             <input
               type="text"
               name="name"
-              autoComplete="true"
-              minLength={2}
-              maxLength={30}
               className={`form-profile__input form-profile__input_type_login ${
                 !isValid && errors.name && "form-profile__input_type_error"
               }`}
-              required={true}
+              required
               onInput={handleChange}
-              value={name || ""}
+              value={name || nameUser || ""}
             />
             <span className="form-profile__error-span form-profile__error-span_active">
               {errors.name}
@@ -58,7 +62,7 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
           className={`form-profile__submit ${
             !isValid && "form-profile__submit_disabled"
           } hover-button`}
-          disabled={!isValid}
+          disabled={!isValid || isChanged}
         >
           Сохранить
         </button>

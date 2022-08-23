@@ -85,7 +85,7 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("saved-movies");
     localStorage.removeItem("movies");
-    navigate("/signin", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const onLogin = (email, password) => {

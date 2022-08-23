@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfileModalForm.css";
 import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
 
-const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
-  const { values, errors, handleChange, isValid } = useForm();
+const ProfileModalForm = ({
+  closePopup,
+  isActive,
+  onChangeUserInfo,
+  nameUser,
+  emailUser,
+}) => {
+  const { values, errors, handleChange, isValid, setValues } = useForm();
   const { email, name } = values;
+  const isChanged = Boolean(email === emailUser && name === nameUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onChangeUserInfo(email, name);
   };
+
+  useEffect(() => {
+    setValues({ name: nameUser, email: emailUser });
+  }, []);
 
   return (
     <Popup closePopup={closePopup} isActive={isActive}>
@@ -53,9 +64,9 @@ const ProfileModalForm = ({ closePopup, isActive, onChangeUserInfo }) => {
         <button
           type="submit"
           className={`form-profile__submit ${
-            !isValid && "form-profile__submit_disabled"
+            !isValid && isChanged && "form-profile__submit_disabled"
           } hover-button`}
-          disabled={!isValid}
+          disabled={!isValid || isChanged}
         >
           Сохранить
         </button>

@@ -6,7 +6,8 @@ export const useFilter = () => {
       movies &&
       movies.filter(
         ({ nameRU, duration }) =>
-          nameRU.toLowerCase().includes(value) && (!isShort || duration <= 40)
+          nameRU.toLowerCase().includes(value.toLowerCase()) &&
+          (!isShort || duration <= 40)
       );
     setMovies(filteredMovies);
   };

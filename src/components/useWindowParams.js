@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import movies from "./Movies/Movies";
 
 export const useWindowParams = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [countMovies, setCountMovies] = useState(0);
+  const [loadMoviesCount, setLoadMoviesCount] = useState(0);
+  const [displayedMoviesCount, setDisplayedMoviesCount] = useState(0);
 
   const setCurrentWidth = () => {
     setWindowWidth(window.innerWidth);
@@ -10,32 +12,45 @@ export const useWindowParams = () => {
 
   useEffect(() => {
     window.addEventListener("resize", setCurrentWidth);
-
-    if (windowWidth >= 1280) {
-      setCountMovies(12);
-    } else if (windowWidth < 1280 && windowWidth >= 481) {
-      setCountMovies(8);
-    } else {
-      setCountMovies(5);
-    }
-
+    setLoadMoviesCount(windowWidth > 768 ? 3 : 2);
     return () => {
       window.removeEventListener("resize", setCurrentWidth);
     };
   }, [windowWidth]);
 
-  const showMoreMovies = () => {
-    return windowWidth >= 1280
-      ? setCountMovies((prev) => prev + 3)
-      : setCountMovies((prev) => prev + 2);
+  const showMoreMovies = () =>
+    setDisplayedMoviesCount((prev) =>
+      Math.min(prev + loadMoviesCount, movies.length)
+    );
+
+  const getDisplayedMovies = (movies) =>
+    movies && movies.length > 0 && movies.slice(0, displayedMoviesCount);
+
+  const filterMovies = (value, isShort, movies) => {
+    return (
+      movies &&
+      movies.filter(
+        ({ nameRU, duration }) =>
+          nameRU.toLowerCase().includes(value.toLowerCase()) &&
+          (!isShort || duration <= 40)
+      )
+    );
   };
 
-  const renderMovies = (movies) =>
-    movies && movies.length > 0 && movies.slice(0, countMovies);
+  useEffect(() => {
+    if (windowWidth > 768) {
+      setDisplayedMoviesCount(12);
+    } else if (windowWidth > 480) {
+      setDisplayedMoviesCount(8);
+    } else {
+      setDisplayedMoviesCount(5);
+    }
+  }, [value, isShort]);
 
   return {
     showMoreMovies,
-    renderMovies,
-    countMovies,
+    getDisplayedMovies,
+    displayedMoviesCount,
+    filterMovies,
   };
 };

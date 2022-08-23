@@ -1,48 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Movies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import { useWindowParams } from "../useWindowParams";
 
 const Movies = ({
   openBurgerMenu,
   isLoggedIn,
   moviesList,
-  setMovies,
   onMovieSave,
   checkIsSavedMovie,
-  getMovies,
   stopRequestPreloader,
+  isShort,
+  searchValue,
+  hasMoreMovies,
+  loadMoreMovies,
+  handleSearch,
+  setIsShort,
 }) => {
-  const { showMoreMovies, renderMovies, countMovies } = useWindowParams();
-
-  const movies = renderMovies(moviesList);
-
+  console.log(hasMoreMovies);
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
           <SearchForm
-            setMovies={setMovies}
-            getMovies={getMovies}
+            isShort={isShort}
+            searchValue={searchValue}
             stopLoader={stopRequestPreloader}
+            handleSearch={handleSearch}
+            setIsShort={setIsShort}
           />
         </div>
 
         <MoviesCardList
-          moviesList={movies}
+          moviesList={moviesList}
           changeMovieStatus={onMovieSave}
           checkIsSavedMovie={checkIsSavedMovie}
         />
         <div className="more-button-container">
-          {movies && moviesList.length > countMovies && (
+          {hasMoreMovies && (
             <button
               className="load-more-btn"
               type="button"
-              onClick={() => showMoreMovies()}
+              onClick={() => loadMoreMovies()}
             >
               Ещё
             </button>

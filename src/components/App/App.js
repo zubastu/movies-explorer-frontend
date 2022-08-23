@@ -12,8 +12,8 @@ import Preloader from "../Preloader/Preloader";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { getMovies, loadSearchResultStatus } from "../../utils/MoviesUtils";
 
 function App() {
   const [state, setState] = useState({
@@ -24,10 +24,6 @@ function App() {
     profileModalActive: false,
     isLoggedIn: false,
   });
-  const [preloaderActive, setPreloaderActive] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
 
   const {
     menuActive,
@@ -37,6 +33,32 @@ function App() {
     profileModalActive,
     isLoggedIn,
   } = state;
+
+  const [preloaderActive, setPreloaderActive] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const [hasMoreMovies, setHasMoreMovies] = useState(false);
+
+  const [isShort, setIsShort] = useState(false);
+
+  const handleSearch = (name, isShort) => {
+    getMovies(name, isShort, window.innerWidth, movies.length).then(
+      ({ movies, hasMoreMovies }) => {
+        setMovies(movies);
+        setHasMoreMovies(hasMoreMovies);
+        setSearchValue(name);
+      }
+    );
+  };
+
+  const loadMoreMovies = () => {
+    handleSearch(searchValue, isShort);
+  };
 
   const navigate = useNavigate();
 
@@ -82,8 +104,7 @@ function App() {
 
   const onHandleExit = () => {
     setState({ ...state, isLoggedIn: false });
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("movies");
+    localStorage.clear();
     navigate("/", { replace: true });
   };
 
@@ -116,23 +137,6 @@ function App() {
         showErrorPopup(`${e} Введите другие данные, либо они уже используются`)
       )
       .finally(() => stopRequestPreloader());
-  };
-
-  async function getMovies() {
-    startRequestPreloader();
-    if (!localStorage.getItem("movies")) {
-      return moviesApi.getMovies().then((moviesList) => {
-        const movies = JSON.stringify(moviesList);
-        localStorage.setItem("movies", movies);
-        return moviesList;
-      });
-    } else {
-      return JSON.parse(localStorage.getItem("movies"));
-    }
-  }
-
-  const setMoviesList = (movies) => {
-    setMovies(movies);
   };
 
   async function getSavedMovies() {
@@ -242,6 +246,14 @@ function App() {
       .catch((e) => showErrorPopup(`Что-то пошло не так ${e.message}`));
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    const savedState = loadSearchResultStatus();
+    setMovies(savedState.movies || []);
+    setIsShort(savedState.isShort || false);
+    setHasMoreMovies(savedState.hasMoreMovies || false);
+    setSearchValue(savedState.name || "");
+  }, []);
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -271,12 +283,16 @@ function App() {
                 component={Movies}
                 openBurgerMenu={openBurgerMenu}
                 isLoggedIn={isLoggedIn}
-                setMovies={setMoviesList}
                 moviesList={movies}
-                getMovies={getMovies}
                 onMovieSave={onMovieSave}
                 checkIsSavedMovie={checkIsSavedMovie}
                 stopRequestPreloader={stopRequestPreloader}
+                searchValue={searchValue}
+                hasMoreMovies={hasMoreMovies}
+                handleSearch={handleSearch}
+                loadMoreMovies={loadMoreMovies}
+                setIsShort={setIsShort}
+                isShort={isShort}
               />
             }
           />

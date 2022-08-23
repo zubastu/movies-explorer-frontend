@@ -10,7 +10,7 @@
   box-sizing: border-box;
   width: 100%;
 }
-@media screen and (max-width:1279px) {
+@media screen and (max-width:768px) {
   .movies-card-list{
     grid-template-columns: repeat(2, max-content);
     grid-auto-rows: 1fr;
@@ -27,7 +27,7 @@
     row-gap: 36px;
   }
 }
-@media screen and (max-width:760px) {
+@media screen and (max-width:480px) {
   .movies-card-list{
     grid-template-columns: minmax(min-content, max-content);
     grid-template-rows: 1fr;

@@ -1,42 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./SearchForm.css";
 import searchIcon from "../../images/search-icon.svg";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { useForm } from "../useForm";
-import { useFilter } from "../useFilter";
 
-const SearchForm = ({ setMovies, getMovies, stopLoader }) => {
-  const [isShort, setIsShort] = useState(false);
-
-  const { values, handleChange, isValid } = useForm();
+const SearchForm = ({ searchValue, handleSearch, isShort, setIsShort }) => {
+  const { values, handleChange, isValid, setValues } = useForm();
   const { searchInput } = values;
-  const { filterMovies } = useFilter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getMovies()
-      .then((movies) => {
-        filterMovies(
-          searchInput,
-          setMovies,
-          isShort,
-          movies,
-          saveSearchResultStatus
-        );
-        stopLoader();
-      })
-      .catch((e) => console.log(e));
+    handleSearch(searchInput, isShort);
   };
 
-  const handleChangeShort = (e) => {
-    setIsShort(e.target.checked);
-  };
-
-  const saveSearchResultStatus = (checkbox, movies, inputValue) => {
-    localStorage.setItem("searchCheckbox", JSON.stringify(checkbox));
-    localStorage.setItem("lastFindMoviesLis", JSON.stringify(movies));
-    localStorage.setItem("searchInputValue", JSON.stringify(inputValue));
-  };
+  useEffect(() => {
+    setValues({ searchInput: searchValue });
+  }, []);
 
   return (
     <>
@@ -61,7 +40,7 @@ const SearchForm = ({ setMovies, getMovies, stopLoader }) => {
           />
         </fieldset>
       </form>
-      <CustomCheckbox isShort={isShort} handleChangeShort={handleChangeShort} />
+      <CustomCheckbox isShort={isShort} setIsShort={setIsShort} />
     </>
   );
 };

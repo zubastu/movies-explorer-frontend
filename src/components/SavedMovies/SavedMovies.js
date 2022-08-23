@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SavedMovies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -15,6 +15,9 @@ const SavedMovies = ({
   checkIsSavedMovie,
   stopRequestPreloader,
 }) => {
+  useEffect(() => {
+    getSavedMovies().then((savedMovies) => setSavedMovies(savedMovies));
+  }, []);
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />

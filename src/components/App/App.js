@@ -93,7 +93,6 @@ function App() {
       .login(email, password)
       .then((res) => {
         successLogin(res);
-        getSavedMovies().then((savedMovies) => setSavedMoviesList(savedMovies));
         navigate("/movies", { replace: true });
       })
       .catch((e) => showErrorPopup(`${e} Неправильная почта или пароль`))
@@ -110,9 +109,6 @@ function App() {
             .login(email, password)
             .then((res) => {
               res.token && successLogin(res);
-              getSavedMovies().then((savedMovies) =>
-                setSavedMoviesList(savedMovies)
-              );
               navigate("/movies", { replace: true });
             })
             .catch((e) => console.log(e));
@@ -180,9 +176,6 @@ function App() {
         .authorization()
         .then((res) => {
           successLogin(res);
-          getSavedMovies().then((savedMovies) => {
-            setSavedMoviesList(savedMovies);
-          });
         })
         .catch((e) => console.log(e));
   }, [isLoggedIn]);

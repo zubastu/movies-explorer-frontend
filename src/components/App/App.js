@@ -182,7 +182,6 @@ function App() {
           successLogin(res);
           getSavedMovies().then((savedMovies) => {
             setSavedMoviesList(savedMovies);
-            navigate("/", { replace: true });
           });
         })
         .catch((e) => console.log(e));

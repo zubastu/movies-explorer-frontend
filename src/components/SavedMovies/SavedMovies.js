@@ -15,6 +15,14 @@ const SavedMovies = ({
   checkIsSavedMovie,
   stopRequestPreloader,
 }) => {
+  useEffect(() => {
+    getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <section className="saved-movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />

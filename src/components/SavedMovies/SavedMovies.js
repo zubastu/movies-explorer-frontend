@@ -17,6 +17,7 @@ const SavedMovies = ({
   handleSearchSavedMovies,
 }) => {
   const [isShort, setIsShort] = useState(false);
+
   useEffect(() => {
     getSavedMovies()
       .then((movies) => {
@@ -24,6 +25,10 @@ const SavedMovies = ({
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const handleSetShortSavedMovies = (name, isShort) => {
+    handleSearchSavedMovies(name, !isShort);
+  };
 
   return (
     <section className="saved-movies">
@@ -37,6 +42,7 @@ const SavedMovies = ({
             handleSearch={handleSearchSavedMovies}
             isShort={isShort}
             setIsShort={setIsShort}
+            handleSetShortMovies={handleSetShortSavedMovies}
           />
         </div>
         <MoviesCardList

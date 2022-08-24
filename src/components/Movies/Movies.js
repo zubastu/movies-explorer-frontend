@@ -18,6 +18,7 @@ const Movies = ({
   loadMoreMovies,
   handleSearch,
   setIsShort,
+  handleSetShortMovies,
 }) => {
   const isEmpty = Boolean(localStorage.getItem("movies") && moviesList <= 0);
 
@@ -32,6 +33,7 @@ const Movies = ({
             setIsShort={setIsShort}
             isShort={isShort}
             searchValue={searchValue}
+            handleSetShortMovies={handleSetShortMovies}
           />
         </div>
 

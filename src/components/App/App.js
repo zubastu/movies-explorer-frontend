@@ -76,6 +76,10 @@ function App() {
       .catch((e) => console.log(e));
   };
 
+  const handleSetShortMovies = (name, isShort) => {
+    handleSearchMovies(name, !isShort);
+  };
+
   const navigate = useNavigate();
 
   const startRequestPreloader = () => setPreloaderActive(true);
@@ -309,6 +313,7 @@ function App() {
                 loadMoreMovies={loadMoreMovies}
                 setIsShort={setIsShort}
                 isShort={isShort}
+                handleSetShortMovies={handleSetShortMovies}
               />
             }
           />

@@ -4,7 +4,13 @@ import searchIcon from "../../images/search-icon.svg";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import { useForm } from "../useForm";
 
-const SearchForm = ({ searchValue, handleSearch, isShort, setIsShort }) => {
+const SearchForm = ({
+  searchValue,
+  handleSearch,
+  isShort,
+  setIsShort,
+  handleSetShortMovies,
+}) => {
   const { values, handleChange, isValid, setValues } = useForm();
   const { searchInput } = values;
 
@@ -40,7 +46,12 @@ const SearchForm = ({ searchValue, handleSearch, isShort, setIsShort }) => {
           />
         </fieldset>
       </form>
-      <CustomCheckbox isShort={isShort} setIsShort={setIsShort} />
+      <CustomCheckbox
+        isShort={isShort}
+        setIsShort={setIsShort}
+        handleSetShortMovies={handleSetShortMovies}
+        searchInput={searchInput}
+      />
     </>
   );
 };

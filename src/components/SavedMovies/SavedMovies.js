@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SavedMovies.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -14,7 +14,9 @@ const SavedMovies = ({
   onMovieDelete,
   checkIsSavedMovie,
   stopRequestPreloader,
+  handleSearchSavedMovies,
 }) => {
+  const [isShort, setIsShort] = useState(false);
   useEffect(() => {
     getSavedMovies()
       .then((movies) => {
@@ -32,6 +34,9 @@ const SavedMovies = ({
             setMovies={setSavedMovies}
             getMovies={getSavedMovies}
             stopLoader={stopRequestPreloader}
+            handleSearch={handleSearchSavedMovies}
+            isShort={isShort}
+            setIsShort={setIsShort}
           />
         </div>
         <MoviesCardList

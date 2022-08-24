@@ -19,18 +19,17 @@ const Movies = ({
   handleSearch,
   setIsShort,
 }) => {
-  console.log(hasMoreMovies);
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
           <SearchForm
-            isShort={isShort}
-            searchValue={searchValue}
             stopLoader={stopRequestPreloader}
             handleSearch={handleSearch}
             setIsShort={setIsShort}
+            isShort={isShort}
+            searchValue={searchValue}
           />
         </div>
 

@@ -81,4 +81,5 @@ export {
   getLoadMoviesCount,
   getMoviesLimit,
   loadSearchResultStatus,
+  filterMovies,
 };

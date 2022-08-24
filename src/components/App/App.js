@@ -13,7 +13,11 @@ import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import TooltipModalWindow from "../TooltipModalWindow/TooltipModalWindow";
 import { mainApi } from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { getMovies, loadSearchResultStatus } from "../../utils/MoviesUtils";
+import {
+  getMovies,
+  loadSearchResultStatus,
+  filterMovies,
+} from "../../utils/MoviesUtils";
 
 function App() {
   const [state, setState] = useState({
@@ -46,7 +50,7 @@ function App() {
 
   const [isShort, setIsShort] = useState(false);
 
-  const handleSearch = (name, isShort) => {
+  const handleSearchMovies = (name, isShort) => {
     getMovies(name, isShort, window.innerWidth, movies.length).then(
       ({ movies, hasMoreMovies }) => {
         setMovies(movies);
@@ -57,7 +61,19 @@ function App() {
   };
 
   const loadMoreMovies = () => {
-    handleSearch(searchValue, isShort);
+    handleSearchMovies(searchValue, isShort);
+  };
+
+  const handleSearchSavedMovies = (name, isShort) => {
+    mainApi
+      .getSavedMovies()
+      .then((movies) => {
+        return filterMovies(movies, isShort, name);
+      })
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((e) => console.log(e));
   };
 
   const navigate = useNavigate();
@@ -289,7 +305,7 @@ function App() {
                 stopRequestPreloader={stopRequestPreloader}
                 searchValue={searchValue}
                 hasMoreMovies={hasMoreMovies}
-                handleSearch={handleSearch}
+                handleSearch={handleSearchMovies}
                 loadMoreMovies={loadMoreMovies}
                 setIsShort={setIsShort}
                 isShort={isShort}
@@ -309,6 +325,7 @@ function App() {
                 onMovieDelete={onMovieDelete}
                 checkIsSavedMovie={checkIsSavedMovie}
                 stopRequestPreloader={stopRequestPreloader}
+                handleSearchSavedMovies={handleSearchSavedMovies}
               />
             }
           />

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./ProfileModalForm.css";
 import Popup from "../Popup/Popup";
 import { useForm } from "../useForm";
+import validator from "validator/es";
 
 const ProfileModalForm = ({
   closePopup,
@@ -13,6 +14,10 @@ const ProfileModalForm = ({
   const { values, errors, handleChange, isValid, setValues } = useForm();
   const { email, name } = values;
   const isChanged = Boolean(email === emailUser && name === nameUser);
+  const isDisabled = Boolean(
+    !isValid || isChanged || !validator.isEmail(email)
+  );
+  console.log(isDisabled);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,10 +69,12 @@ const ProfileModalForm = ({
 
         <button
           type="submit"
-          className={`form-profile__submit ${
-            !isValid && isChanged && "form-profile__submit_disabled"
-          } hover-button`}
-          disabled={!isValid || isChanged}
+          className={
+            isDisabled
+              ? "form-profile__submit form-profile__submit_disabled"
+              : "form-profile__submit hover-button"
+          }
+          disabled={isDisabled}
         >
           Сохранить
         </button>

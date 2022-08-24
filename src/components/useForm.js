@@ -11,20 +11,20 @@ export function useForm() {
     const name = target.name;
     const value = target.value;
 
-    if (name === "email") {
-      if (!validator.isEmail(value)) {
-        target.setCustomValidity("Email должен быть корректным!");
-      } else {
-        target.setCustomValidity("");
-      }
-    }
-
     if (name === "name" && target.validity.patternMismatch) {
       target.setCustomValidity(
         "Имя должно содержать только латиницу, кириллицу, пробел или дефис."
       );
     } else {
       target.setCustomValidity("");
+    }
+
+    if (name === "email") {
+      if (!validator.isEmail(value)) {
+        target.setCustomValidity("Email должен быть корректным!");
+      } else {
+        target.setCustomValidity("");
+      }
     }
 
     setValues({ ...values, [name]: value });

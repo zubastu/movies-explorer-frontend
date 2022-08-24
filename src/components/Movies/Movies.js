@@ -37,7 +37,7 @@ const Movies = ({
           />
         </div>
 
-        {isEmpty && <h3 className="movies__no-result">Нет совпадений</h3>}
+        {isEmpty && <h3 className="movies__no-result">Ничего не найдено</h3>}
 
         <MoviesCardList
           moviesList={moviesList}

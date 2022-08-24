@@ -26,7 +26,7 @@ const getMoviesLimit = (windowWidth) => {
 
 const getMoviesPages = (movies, windowWidth, moviesDisplayCount) => {
   let moviesLimit = getMoviesLimit(windowWidth);
-  if (moviesDisplayCount !== undefined && moviesDisplayCount > 0) {
+  if (moviesDisplayCount !== undefined && moviesDisplayCount >= moviesLimit) {
     moviesLimit = moviesDisplayCount + getLoadMoviesCount(windowWidth);
   }
   const sliced = movies.slice(0, moviesLimit);

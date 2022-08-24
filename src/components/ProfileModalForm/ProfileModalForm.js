@@ -25,7 +25,7 @@ const ProfileModalForm = ({
 
   return (
     <Popup closePopup={closePopup} isActive={isActive}>
-      <form className="form-profile" noValidate={true} onSubmit={handleSubmit}>
+      <form className="form-profile" noValidate={true} onSubmit={handleSubmit} >
         <fieldset className="form-profile__field">
           <label className="form-profile__label">
             E-mail

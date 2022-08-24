@@ -50,6 +50,14 @@ function App() {
 
   const [isShort, setIsShort] = useState(false);
 
+  const onHandleExit = () => {
+    setState({ ...state, isLoggedIn: false });
+    setSavedMovies([]);
+    setMovies([]);
+    localStorage.clear();
+    navigate("/", { replace: true });
+  };
+
   const handleSearchMovies = (name, isShort) => {
     getMovies(name, isShort, window.innerWidth, movies.length).then(
       ({ movies, hasMoreMovies }) => {
@@ -120,12 +128,6 @@ function App() {
     setState({ ...state, isLoggedIn: true });
     setCurrentUser({ name, email, _id });
     token && localStorage.setItem("jwt", token);
-  };
-
-  const onHandleExit = () => {
-    setState({ ...state, isLoggedIn: false });
-    localStorage.clear();
-    navigate("/", { replace: true });
   };
 
   const onLogin = (email, password) => {

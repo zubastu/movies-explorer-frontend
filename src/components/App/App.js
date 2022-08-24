@@ -54,6 +54,7 @@ function App() {
     setState({ ...state, isLoggedIn: false });
     setSavedMovies([]);
     setMovies([]);
+    setSearchValue("");
     localStorage.clear();
     navigate("/", { replace: true });
   };

@@ -17,7 +17,6 @@ const ProfileModalForm = ({
   const isDisabled = Boolean(
     !isValid || isChanged || !validator.isEmail(email)
   );
-  console.log(isDisabled);
 
   const handleSubmit = (e) => {
     e.preventDefault();

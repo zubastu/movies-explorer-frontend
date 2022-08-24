@@ -19,6 +19,9 @@ const Movies = ({
   handleSearch,
   setIsShort,
 }) => {
+  const isEmpty = Boolean(localStorage.getItem("movies") && moviesList <= 0);
+
+  console.log(isEmpty);
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
@@ -32,6 +35,8 @@ const Movies = ({
             searchValue={searchValue}
           />
         </div>
+
+        {isEmpty && <h3 className="movies__no-result">Нет совпадений</h3>}
 
         <MoviesCardList
           moviesList={moviesList}

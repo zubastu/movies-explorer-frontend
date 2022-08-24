@@ -27,6 +27,7 @@ const RegisterForm = ({ onRegister }) => {
             maxLength={30}
             value={name || ""}
             onInput={handleChange}
+            pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
           />
           <span className="form-register__error-span form-register__error-span_active">
             {errors.name}

@@ -19,6 +19,14 @@ export function useForm() {
       }
     }
 
+    if (name === "name" && target.validity.patternMismatch) {
+      target.setCustomValidity(
+        "Имя должно содержать только латиницу, кириллицу, пробел или дефис."
+      );
+    } else {
+      target.setCustomValidity("");
+    }
+
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());

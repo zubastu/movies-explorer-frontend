@@ -1,4 +1,6 @@
 .movie-card{
+  display: flex;
+  flex-direction: column;
   max-height: 271px;
   max-width: 364px;
   min-width: 300px;
@@ -16,12 +18,15 @@
   gap: 9px;
 }
 .movie-card__title{
-  width: 100%;
+  max-width: 280px;
   margin: 0;
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
   color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .movie-card__duration{
   margin: 0;
@@ -31,48 +36,53 @@
   color: #A0A0A0;
 }
 .movie-card__image{
-  width: 100%;
+  max-width: 100%;
+  max-height: 203px;
   object-fit: cover;
-  align-self: flex-end;
+  height: 100%;
+  width: 100%;
 }
-.movie-card__input{
-  position: relative;
-  width: 30px;
+
+.movie-card__link{
+  width: 100%;
+  height: 100%;
+}
+
+.movie-card__save-button{
   height: 30px;
-  border-radius: 50%;
-  -webkit-appearance: none;
-  outline: none;
-  background: #F9F9F9;
-  transition: .5s ease;
-  cursor:pointer;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  background: url("../../images/save-movie-disabled.svg") center;
 }
-.movie-card__input:hover{
-  background: #2BE080;
-  opacity: .5;
+
+.movie-card__save-button_active{
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  background: url("../../images/save-movie-active.svg") center;
 }
-.movie-card__input:checked{
-  background-color: #2BE080;
+
+.movie-card__delete-button{
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  background: url("../../images/delete-movie.svg") center;
 }
-.movie-card__input:before{
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 14px;
-  background: url("../../images/save-checkbox-disabled.svg");
-  left: 10px;
-  top: 8px;
-}
-.movie-card__input:checked:before{
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 14px;
-  background: url("../../images/saave-checkbox-icon.svg");
-  left: 10px;
-  top: 8px;
-}
+
 @media screen and (max-width: 1000px) {
   .movie-card{
     max-width: 339px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .movie-card{
+    max-width: 300px;
+    box-sizing: border-box;
+  }
+  .movie-card__title{
+    max-width: 200px;
   }
 }

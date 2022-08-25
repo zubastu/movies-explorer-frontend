@@ -1,0 +1,31 @@
+.tooltip-modal{
+  background-color: white;
+  height: 430px;
+  width: 380px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+.tooltip-modal__image{
+  width: 150px;
+  height: 150px;
+}
+.tooltip-modal__text{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  max-width: calc(100% - 30px *2);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+@media screen and (max-width: 500px){
+  .tooltip-modal{
+    height: 430px;
+    width: 300px;
+  }
+}

@@ -1,19 +1,22 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
+import { NavLink } from "react-router-dom";
 
-const Header = ({ setMenuActive }) => {
-  const location = useLocation();
+const Header = ({ openBurgerMenu, isLoggedIn }) => {
   return (
     <header className="header">
-      <img className="logo" alt="Логотип" src={logo} />
-      <Navigation />
-      {location.pathname !== "/" && (
+      <NavLink to="/">
+        <img className="logo" alt="Логотип" src={logo} />
+      </NavLink>
+
+      <Navigation isLoggedIn={isLoggedIn} />
+
+      {isLoggedIn && (
         <button
           className="header__burger-button hover-button"
-          onClick={() => setMenuActive(true)}
+          onClick={() => openBurgerMenu()}
         />
       )}
     </header>

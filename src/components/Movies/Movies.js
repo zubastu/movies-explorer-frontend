@@ -5,20 +5,55 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-const Movies = ({ setMenuActive }) => {
+const Movies = ({
+  openBurgerMenu,
+  isLoggedIn,
+  moviesList,
+  onMovieSave,
+  checkIsSavedMovie,
+  stopRequestPreloader,
+  isShort,
+  searchValue,
+  hasMoreMovies,
+  loadMoreMovies,
+  handleSearch,
+  setIsShort,
+  handleSetShortMovies,
+}) => {
+  const isEmpty = Boolean(localStorage.getItem("movies") && moviesList <= 0);
+  const isHasMore = localStorage.getItem("movies") && hasMoreMovies;
   return (
     <section className="movies">
-      <Header setMenuActive={setMenuActive} />
+      <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
       <main className="main">
         <div className="search-container">
-          <SearchForm />
+          <SearchForm
+            stopLoader={stopRequestPreloader}
+            handleSearch={handleSearch}
+            setIsShort={setIsShort}
+            isShort={isShort}
+            searchValue={searchValue}
+            handleSetShortMovies={handleSetShortMovies}
+          />
         </div>
 
-        <MoviesCardList />
+        {isEmpty && <h3 className="movies__no-result">Ничего не найдено</h3>}
+
+        <MoviesCardList
+          moviesList={moviesList}
+          changeMovieStatus={onMovieSave}
+          checkIsSavedMovie={checkIsSavedMovie}
+        />
         <div className="more-button-container">
-          <button className="load-more-btn" type="button">
-            Ещё
-          </button>
+          {isHasMore && (
+            <button
+              className="load-more-btn"
+              type="button"
+              onClick={() => loadMoreMovies()}
+            >
+              Ещё
+            </button>
+          )}
         </div>
       </main>
       <Footer />

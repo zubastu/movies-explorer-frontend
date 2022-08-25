@@ -1,14 +1,14 @@
 import React from "react";
 import "./Login.css";
-import Form from "../Form/Form";
+import LoginForm from "../LoginForm/LoginForm";
 import AuthTitle from "../AuthTitle/AuthTitle";
 import AuthNav from "../AuthNav/AuthNav";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   return (
     <section className="login">
       <AuthTitle title="Рады видеть!" />
-      <Form formName="login" />
+      <LoginForm formName="login" onLogin={onLogin} />
       <AuthNav type="login" />
     </section>
   );

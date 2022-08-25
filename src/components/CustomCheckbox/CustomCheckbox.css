@@ -25,7 +25,7 @@
   outline: none;
   background: #EBEBEB;
   border-radius: 20px;
-  transition: .5s ease;
+  transition: left .2s ease;
   cursor: pointer;
 }
 .custom-checkbox__input:hover{
@@ -46,7 +46,7 @@
   top: 2px;
   left: 2px;
   background: #F5F5F5;
-  transition: .5s ease;
+  transition: left .2s ease;
   margin: 0;
   padding: 0;
 }

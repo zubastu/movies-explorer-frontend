@@ -2,39 +2,41 @@ import React from "react";
 import "./NavigationPopup.css";
 import { NavLink, useLocation } from "react-router-dom";
 
-const NavigationPopup = ({ menuActive, setMenuActive }) => {
+const NavigationPopup = ({ menuActive, closeBurgerMenu }) => {
   const location = useLocation();
+
+  const popupClassName = `navigation-popup ${
+    menuActive && "navigation-popup_type_active"
+  }`;
+  const overlayClassName = `navigation-popup__overlay  ${
+    menuActive && "navigation-popup__overlay_type_active"
+  }`;
+  const popupNavLinksClassName = `navigation-popup__links  ${
+    menuActive && "navigation-popup__links_type_active"
+  }`;
+
   return (
-    <div
-      className={
-        menuActive
-          ? "navigation-popup navigation-popup_type_active"
-          : "navigation-popup"
-      }
-    >
-      <div
-        className={
-          menuActive
-            ? "navigation-popup__overlay navigation-popup__overlay_type_active"
-            : "navigation-popup__overlay"
-        }
-      ></div>
-      <div
-        className={
-          menuActive
-            ? "navigation-popup__links navigation-popup__links_type_active"
-            : "navigation-popup__links"
-        }
-      >
+    <div className={popupClassName}>
+      <div className={overlayClassName} onClick={() => closeBurgerMenu()} />
+      <div className={popupNavLinksClassName}>
         <button
           className="navigation-popup__close hover-button"
-          onClick={() => setMenuActive(false)}
+          onClick={() => closeBurgerMenu()}
         />
         <nav className="navigation-popup__navigation-container">
-          <NavLink to="/" className="navigation-popup__link hover-link">
+          <NavLink
+            onClick={() => closeBurgerMenu()}
+            to="/"
+            className={
+              location.pathname === "/"
+                ? "navigation-popup__link navigation-popup__link_type_active hover-link"
+                : "navigation-popup__link hover-link"
+            }
+          >
             Главная
           </NavLink>
           <NavLink
+            onClick={() => closeBurgerMenu()}
             to="/movies"
             className={
               location.pathname === "/movies"
@@ -45,6 +47,7 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
             Фильмы
           </NavLink>
           <NavLink
+            onClick={() => closeBurgerMenu()}
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
@@ -56,6 +59,7 @@ const NavigationPopup = ({ menuActive, setMenuActive }) => {
           </NavLink>
         </nav>
         <NavLink
+          onClick={() => closeBurgerMenu()}
           to="/profile"
           className="navigation-popup__link navigation-popup__link_type_account hover-button"
         >

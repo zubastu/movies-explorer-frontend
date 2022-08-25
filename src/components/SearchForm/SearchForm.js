@@ -1,26 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SearchForm.css";
 import searchIcon from "../../images/search-icon.svg";
 import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
+import { useForm } from "../useForm";
 
-const SearchForm = () => {
+const SearchForm = ({
+  searchValue,
+  handleSearch,
+  isShort,
+  setIsShort,
+  handleSetShortMovies,
+}) => {
+  const { values, handleChange, isValid, setValues } = useForm();
+  const { searchInput } = values;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchInput, isShort);
+  };
+
+  useEffect(() => {
+    setValues({ searchInput: searchValue });
+  }, []);
+
   return (
     <>
-      <form className="form form__type_search">
+      <form className="search-form" noValidate={true} onSubmit={handleSubmit}>
         <img className="search-icon" alt="Картинка поиска" src={searchIcon} />
-        <fieldset className="form__field form__field__type_search">
+        <fieldset className="search-form__fieldset">
           <input
-            className="form__input form__input_type_search"
+            className="search-form__input"
             placeholder="Фильм"
             required={true}
+            name="searchInput"
+            type="text"
+            value={searchInput || ""}
+            onInput={handleChange}
           />
           <button
             type="submit"
-            className="form__submit form__submit_type_search hover-button"
+            disabled={!isValid}
+            className={`search-form__submit ${
+              !isValid && "search-form__submit_disabled"
+            } hover-button`}
           />
         </fieldset>
       </form>
-      <CustomCheckbox />
+      <CustomCheckbox
+        isShort={isShort}
+        setIsShort={setIsShort}
+        handleSetShortMovies={handleSetShortMovies}
+        searchInput={searchInput}
+      />
     </>
   );
 };

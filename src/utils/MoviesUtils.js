@@ -37,6 +37,11 @@ const getMoviesPages = (movies, windowWidth, moviesDisplayCount) => {
 };
 
 const filterMovies = (movies, isShort, name) => {
+  if (!name) {
+    return movies.filter(({ duration }) =>
+      isShort ? duration <= 40 : duration > 40
+    );
+  }
   return movies.filter(
     ({ nameRU, duration }) =>
       nameRU.toLowerCase().includes(name.toLowerCase()) &&
@@ -61,11 +66,10 @@ const loadSearchResultStatus = () => {
 };
 
 const getMovies = (name, isShort, windowWidth, moviesDisplayCount) => {
-  if (!name || isShort === undefined) {
-    return Promise.resolve({ hasMoreMovies: false, movies: [] });
-  }
   return getAllMovies()
-    .then((movies) => filterMovies(movies, isShort, name))
+    .then((movies) => {
+      return filterMovies(movies, isShort, name);
+    })
     .then((movies) => getMoviesPages(movies, windowWidth, moviesDisplayCount))
     .then(({ movies, hasMoreMovies }) => {
       saveSearchResultStatus(name, isShort, movies, hasMoreMovies);

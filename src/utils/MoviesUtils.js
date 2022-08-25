@@ -11,11 +11,11 @@ async function getAllMovies() {
 }
 
 const getLoadMoviesCount = (windowWidth) => {
-  return windowWidth > 768 ? 3 : 2;
+  return windowWidth > 1201 ? 3 : 2;
 };
 
 const getMoviesLimit = (windowWidth) => {
-  if (windowWidth > 768) {
+  if (windowWidth > 1201) {
     return 12;
   } else if (windowWidth > 480) {
     return 8;

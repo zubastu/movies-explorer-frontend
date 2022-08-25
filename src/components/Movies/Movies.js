@@ -21,7 +21,7 @@ const Movies = ({
   handleSetShortMovies,
 }) => {
   const isEmpty = Boolean(localStorage.getItem("movies") && moviesList <= 0);
-
+  const isHasMore = localStorage.getItem("movies") && hasMoreMovies;
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />
@@ -45,7 +45,7 @@ const Movies = ({
           checkIsSavedMovie={checkIsSavedMovie}
         />
         <div className="more-button-container">
-          {localStorage.getItem("movies") && hasMoreMovies && (
+          {isHasMore && (
             <button
               className="load-more-btn"
               type="button"

@@ -45,7 +45,7 @@ const Movies = ({
           checkIsSavedMovie={checkIsSavedMovie}
         />
         <div className="more-button-container">
-          {hasMoreMovies && (
+          {localStorage.getItem("movies") && hasMoreMovies && (
             <button
               className="load-more-btn"
               type="button"

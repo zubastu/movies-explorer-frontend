@@ -1,10 +1,11 @@
 import { moviesApi } from "./MoviesApi";
 
 async function getAllMovies() {
-  if (localStorage.getItem("movies")) {
-    return JSON.parse(localStorage.getItem("movies"));
+  const movies = localStorage.getItem("movies");
+  if (movies) {
+    return JSON.parse(movies);
   }
-  return moviesApi.getMovies().then((movies) => {
+  return await moviesApi.getMovies().then((movies) => {
     localStorage.setItem("movies", JSON.stringify(movies));
     return movies;
   });

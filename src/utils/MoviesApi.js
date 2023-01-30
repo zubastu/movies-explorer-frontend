@@ -10,5 +10,5 @@ export default class MoviesApi {
   }
 }
 
-const client = new Client("https://api.nomoreparties.co/beatfilm-movies");
+const client = new Client(" https://api.nomoreparties.co/beatfilm-movies.");
 export const moviesApi = new MoviesApi(client);

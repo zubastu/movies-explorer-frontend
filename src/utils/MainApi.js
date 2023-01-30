@@ -33,7 +33,7 @@ export default class MainApi {
 }
 
 const client = new Client(
-  "https://api.movies.explorer.zubastu.nomoredomains.xyz"
+  "https://api.ilya-makhin.ru/"
 );
 
 export const mainApi = new MainApi(client);

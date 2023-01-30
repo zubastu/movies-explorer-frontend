@@ -8,7 +8,7 @@ const Techs = () => {
       <MainTitle text="Технологии" />
       <div className="tech__content">
         <div className="techs__text-content">
-          <h2 className="techs__title">7 технологий</h2>
+          <h2 className="techs__title">10 технологий</h2>
           <p className="techs__subtitle">
             На курсе веб-разработки мы освоили технологии, которые применили в
             дипломном проекте.
@@ -23,6 +23,9 @@ const Techs = () => {
           <li className="technologies__item">Git</li>
           <li className="technologies__item">Express.js</li>
           <li className="technologies__item">mongoDB</li>
+          <li className="technologies__item">TypeScript</li>
+          <li className="technologies__item">Redux</li>
+          <li className="technologies__item">WebSocket</li>
         </ul>
       </div>
     </section>

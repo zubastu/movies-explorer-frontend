@@ -1,7 +1,7 @@
 import React from "react";
 import "./AboutMe.css";
 import MainTitle from "../MainTitle/MainTitle";
-import testPicture from "../../images/pic__COLOR_pic.png";
+import testPicture from "../../images/DSC_4353.JPG";
 
 const AboutMeAboutMe = () => {
   return (

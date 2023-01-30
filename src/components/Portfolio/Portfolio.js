@@ -8,17 +8,6 @@ const Portfolio = () => {
       <ul className="portfolio-links">
         <li className="portfolio-links__item">
           <a
-            href="https://zubastu.github.io/how-to-learn/"
-            target="_blank"
-            className="portfolio-links__link hover-link"
-          >
-            <p className="portfolio-links__text">Статичный сайт</p>
-            <span className="portfolio-links__arrow">↗</span>
-          </a>
-        </li>
-
-        <li className="portfolio-links__item">
-          <a
             className="portfolio-links__link hover-link"
             href="https://zubastu.github.io/russian-travel/"
             target="_blank"
@@ -31,10 +20,21 @@ const Portfolio = () => {
         <li className="portfolio-links__item">
           <a
             className="portfolio-links__link hover-link"
-            href="https://zubastu.nomoredomains.xyz/"
+            href="https://burger.ilya-makhin.ru/"
             target="_blank"
           >
-            <p className="portfolio-links__text">Одностраничное приложение</p>
+            <p className="portfolio-links__text">Одностраничное приложение Drag-n-Drop</p>
+            <span className="portfolio-links__arrow">↗</span>
+          </a>
+        </li>
+
+        <li className="portfolio-links__item">
+          <a
+            className="portfolio-links__link hover-link"
+            href="https://zubastu.github.io/mesto/"
+            target="_blank"
+          >
+            <p className="portfolio-links__text">Одностраничное адаптивное приложение</p>
             <span className="portfolio-links__arrow">↗</span>
           </a>
         </li>

@@ -65,10 +65,10 @@
   vertical-align: middle;
   height: 100%;
 }
-@media screen and (max-width: 770px){
-  .techs{
-    padding: 90px 50px 90px 50px;
-    gap: 80px;
+@media screen and (max-width: 920px){
+  .technologies{
+    max-width: 300px;
+    flex-wrap: wrap;
   }
   .tech__content{
     gap: 83px;

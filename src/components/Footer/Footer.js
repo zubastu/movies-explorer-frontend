@@ -19,17 +19,10 @@ const Footer = () => {
           </a>
           <a
             className="nav__link hover-link"
-            href="https://github.com/"
+            href="https://github.com/zubastu"
             target="_blank"
           >
             Github
-          </a>
-          <a
-            className="nav__link hover-link"
-            href="https://facebook.com/"
-            target="_blank"
-          >
-            Facebook
           </a>
         </nav>
       </div>

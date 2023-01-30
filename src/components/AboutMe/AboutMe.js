@@ -21,15 +21,6 @@ const AboutMeAboutMe = () => {
             <li className="links__item">
               <a
                 className="links__link hover-link"
-                href="https://facebook.com/"
-                target="_blank"
-              >
-                Facebook
-              </a>
-            </li>
-            <li className="links__item">
-              <a
-                className="links__link hover-link"
                 href="https://github.com/zubastu"
                 target="_blank"
               >

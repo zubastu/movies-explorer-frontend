@@ -22,6 +22,7 @@ const Movies = ({
 }) => {
   const isEmpty = Boolean(localStorage.getItem("movies") && moviesList <= 0);
   const isHasMore = localStorage.getItem("movies") && hasMoreMovies;
+
   return (
     <section className="movies">
       <Header openBurgerMenu={openBurgerMenu} isLoggedIn={isLoggedIn} />

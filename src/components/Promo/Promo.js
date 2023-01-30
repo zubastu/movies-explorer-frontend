@@ -16,7 +16,7 @@ const Promo = () => {
           Технологии
         </Link>
         <Link to={"student-section"} className="promo__nav-item hover-link">
-          Студент
+          Мои проекты
         </Link>
       </nav>
     </section>

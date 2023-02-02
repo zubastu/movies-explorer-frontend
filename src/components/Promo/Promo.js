@@ -5,14 +5,12 @@ import "./Promo.css";
 const Promo = () => {
   return (
     <section className="promo">
-      <h1 className="promo__heading">
-        Учебный проект студента факультета Веб-разработки.
-      </h1>
+      <h1 className="promo__heading">Проект-портфолио</h1>
       <nav className="promo__nav-container">
-        <Link to={"tech-section"} className="promo__nav-item hover-link">
+        <Link to="tech-section" className="promo__nav-item hover-link">
           Технологии
         </Link>
-        <Link to={"student-section"} className="promo__nav-item hover-link">
+        <Link to="student-section" className="promo__nav-item hover-link">
           Мои проекты
         </Link>
       </nav>

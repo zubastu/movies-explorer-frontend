@@ -4,9 +4,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p className="footer__description">
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </p>
+      <p className="footer__description">Проект для размещения моих работ</p>
       <div className="footer__content">
         <p className="footer__copyright">&copy;2022</p>
         <nav className="footer__nav">
